@@ -7,11 +7,15 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Role;
+use App\Models\UserRole;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -46,4 +50,23 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function roles(){
+        return $this->hasMany('App\Models\UserRole');
+    } 
+
+    public function hasRole($role_name){
+        $roles = $this->roles()->get();
+        $role = \App\Models\Role::where('name',$role_name)->first();
+        $role_id = null;
+        if($role){
+            $role_id = $role->id;
+        }
+        foreach($roles as $r){
+            if($role_id == $r->role_id)
+            return true;
+        }
+        return false;
+    }
+
 }
