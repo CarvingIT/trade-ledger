@@ -32,16 +32,6 @@
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
        <div class="grid grid-cols-6 gap-6">
         <!-- User Name -->
-        <div class="col-span-1">
-             <label class="block font-medium text-sm" for="user_name">Salutation</label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="salutation" name="salutation" disabled style="background:#eee;">
-		<option value="">Select</option>
-		<option value="Mr." @if($user->salutation == 'Mr.') selected @endif>Mr.</option>
-		<option value="Mrs." @if($user->salutation == 'Mrs.') selected @endif>Mrs.</option>
-		<option value="Ms." @if($user->salutation == 'Ms.') selected @endif>Ms.</option>
-		<option value="Miss." @if($user->salutation == 'Miss.') selected @endif>Miss.</option>
-		</select>
-        </div>
         <div class="col-span-3">
              <label class="block font-medium text-sm" for="name">Name</label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" value="{{ $user->name }}" readonly style="background:#eee;">
@@ -80,57 +70,13 @@
         -->
 	<!-- Person's Company -->
         <div class="col-span-4">
-             <label class="block font-medium text-sm" for="company_id">Company</label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="company_id" name="company_id" readonly style="background:#eee;">
+             <label class="block font-medium text-sm" for="entity_id">Entity</label>
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" readonly style="background:#eee;">
 		@foreach($entities as $c)
-		<!--option value="{{ $c->id }}" @if($c->id == $user->company_id) selected @endif>{{ $c->company_name }}</option-->
+		<option value="{{ $c->id }}" @if($c->id == $user->entity_id) selected @endif>{{ $c->name }}</option>
 		@endforeach
 		</select>
         </div>
-        <!--
-        <div class="col-span-8 md:col-span-2">
-             <label class="block font-medium text-sm" for="work_telephone_number">Work Telephone Number</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="work_telephone_number" name="work_telephone_number" type="text" value="{{ $user->work_telephone_number }}"  readonly style="background:#eee;">
-        </div>
-        <div class="col-span-8 md:col-span-2">
-             <label class="block font-medium text-sm" for="mobile_telephone_number">Mobile Telephone Number</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="mobile_telephone_number" name="mobile_telephone_number" type="text" value="{{ $user->mobile_telephone_number }}"  readonly style="background:#eee;">
-        </div>
-
-        <div class="col-span-4 md:col-span-2">
-             <input id="optics_newsletters" name="optics_newsletters" type="checkbox" value="1"
-                @if($user->optics_newsletters == 1)
-                checked="checked"
-                @endif
-		@if($user->do_not_email_me == 1) disabled @endif
-              disabled style="background:#eee;">
-             <label class="font-medium text-sm" for="optics_client">Optics Newsletters</label>
-        </div>
-        <div class="col-span-4 md:col-span-2">
-             <input id="wireless_newsletters" name="wireless_newsletters" type="checkbox" value="1"
-                @if($user->wireless_newsletters == 1)
-                checked="checked"
-                @endif
-		@if($user->do_not_email_me == 1) disabled @endif
-                 disabled style="background:#eee;">
-             <label class="font-medium text-sm" for="wireless_client">Wireless Newsletters</label>
-        </div>
-        <div class="col-span-4 md:col-span-2">
-             <input id="do_not_email_me" name="do_not_email_me" type="checkbox" value="1"
-                @if($user->do_not_email_me == 1)
-                checked="checked"
-                @endif
-		@if($user->optics_newsletters == 1 || $user->wireless_newsletters == 1) disabled @endif
-              disabled style="background:#eee;">
-             <label class="font-medium text-sm" for="do_not_email_me">Do Not Email Me</label>
-        </div>
-
-        <div class="col-span-8">
-             <label class="block font-medium text-sm" for="notes_on_this_user">Notes on this person</label>
-             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="notes_on_this_person" name="notes_on_this_person" type="text" readonly style="background:#eee;">{{ $user->notes_on_this_person }}</textarea>
-        </div>
-        -->
-
        </div>
     </div>
 

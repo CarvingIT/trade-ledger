@@ -1,5 +1,5 @@
 $(document).ready(function() {
-     $("#companies").DataTable(
+     $("#entities").DataTable(
         {
         stateSave:true,
         "scrollX": true,
@@ -21,7 +21,7 @@ $(document).ready(function() {
     );
 // New code to retain search value
 // Restore state
-    var table = $('#companies').val();
+    var table = $('#entities').val();
     if(table){
     var state = table.state.loaded();
     if ( state ) {
@@ -51,10 +51,10 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
-    $(".delete_company").click(function(){
-        const company_id = $(this).data('company-id');
-        //alert(company_id);
-        $('#delete_company_id').val(company_id);
+    $(".delete_entity").click(function(){
+        const entity_id = $(this).data('entity-id');
+        //alert(entity_id);
+        $('#delete_entity_id').val(entity_id);
         $("#deletedialog").dialog({
             title:'Are you sure?',
             dialogClass: "alert"
@@ -62,7 +62,7 @@ $(document).ready(function(){
     });
     $(".do-not-delete").click(function() {
          // Execute the redirection function (allows user to use the back button)
-         window.location.href = '/admin/companies';
+         window.location.href = '/admin/entities';
     });
 
     $(".admin-dropdown").click(function(){

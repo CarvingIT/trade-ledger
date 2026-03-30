@@ -48,7 +48,7 @@
              <label class="block font-medium text-sm" for="entity_id">Entities</label>
              <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id">
 		@foreach($entities as $c)
-		<option value="{{ $c->id }}" @if($c->id == $user->entity_id) selected @endif>{{ $c->entity_name }}</option>
+		<option value="{{ $c->id }}" @if($c->id == $user->entity_id) selected @endif>{{ $c->name }}</option>
 		@endforeach
 		</select>
         </div>
