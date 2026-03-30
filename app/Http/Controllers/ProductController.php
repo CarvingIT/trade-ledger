@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Session;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -31,7 +32,12 @@ class ProductController extends Controller
          else{
             $c = Product::find($request->input('product_id'));
          }
-         $c->sku = $request->input('sku');
+         if(!empty($request->input('sku'))){
+            $c->sku = $request->input('sku');
+         }
+         else{
+            $c->sku = Str::random(5);
+         }
          $c->name = $request->input('name');
          $c->description = $request->input('description');
          $c->price = $request->input('price');

@@ -40,8 +40,8 @@ $( function() {
        <div class="grid grid-cols-6 gap-6">
         <!-- SKU -->
         <div class="col-span-8 md:col-span-2">
-             <label class="block font-medium text-sm" for="sku">SKU <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="sku" name="sku" type="text" value="{{ $product->sku }}" required>
+             <label class="block font-medium text-sm" for="sku">SKU</label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="sku" name="sku" type="text" value="{{ $product->sku }}" >
         </div>
         <!-- Product Name -->
         <div class="col-span-8 md:col-span-4">
