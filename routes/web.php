@@ -27,6 +27,13 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/saveentity','\App\Http\Controllers\EntityController@save');
         Route::post('/entity/delete','\App\Http\Controllers\EntityController@deleteEntity');
         Route::get('/entity/{entity_id}','\App\Http\Controllers\EntityController@viewEntity');
+
+        //Products
+        Route::get('/products','\App\Http\Controllers\ProductController@index')->name('products');
+        Route::get('/product-form/{product_id}','\App\Http\Controllers\ProductController@addEditProduct');
+        Route::post('/saveproduct','\App\Http\Controllers\ProductController@save');
+        Route::post('/product/delete','\App\Http\Controllers\ProductController@deleteProduct');
+        Route::get('/product/{product_id}','\App\Http\Controllers\ProductController@viewProduct');
     });
 });
 

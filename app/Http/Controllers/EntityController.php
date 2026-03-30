@@ -62,5 +62,5 @@ class EntityController extends Controller
         return view('entitydetails', ['entity'=>$entity]);
         }
 
-
+// End of the Class
 }
