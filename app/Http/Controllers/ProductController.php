@@ -36,7 +36,7 @@ class ProductController extends Controller
             $c->sku = $request->input('sku');
          }
          else{
-            $c->sku = Str::random(5);
+            $c->sku = Str::uuid();
          }
          $c->name = $request->input('name');
          $c->description = $request->input('description');
