@@ -34,6 +34,27 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/saveproduct','\App\Http\Controllers\ProductController@save');
         Route::post('/product/delete','\App\Http\Controllers\ProductController@deleteProduct');
         Route::get('/product/{product_id}','\App\Http\Controllers\ProductController@viewProduct');
+
+        //Units
+        Route::get('/units','\App\Http\Controllers\UnitController@index')->name('units');
+        Route::get('/unit-form/{unit_id}','\App\Http\Controllers\UnitController@addEditUnit');
+        Route::post('/saveunit','\App\Http\Controllers\UnitController@save');
+        Route::post('/unit/delete','\App\Http\Controllers\UnitController@deleteUnit');
+        Route::get('/unit/{unit_id}','\App\Http\Controllers\UnitController@viewUnit');
+
+        //Currencies
+        Route::get('/currencies','\App\Http\Controllers\CurrencyController@index')->name('currencies');
+        Route::get('/currency-form/{currency_id}','\App\Http\Controllers\CurrencyController@addEditCurrency');
+        Route::post('/savecurrency','\App\Http\Controllers\CurrencyController@save');
+        Route::post('/currency/delete','\App\Http\Controllers\CurrencyController@deleteCurrency');
+        Route::get('/currency/{currency_id}','\App\Http\Controllers\CurrencyController@viewCurrency');
+
+        //Settings
+        Route::get('/settings','\App\Http\Controllers\SettingsController@index')->name('settings');
+        Route::get('/setting-form/{setting_id}','\App\Http\Controllers\SettingsController@addEditSetting');
+        Route::post('/savesetting','\App\Http\Controllers\SettingsController@save');
+        Route::post('/setting/delete','\App\Http\Controllers\SettingsController@deleteSetting');
+        Route::get('/setting/{setting_id}','\App\Http\Controllers\SettingsController@viewSetting');
     });
 });
 
