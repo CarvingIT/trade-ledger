@@ -19,10 +19,10 @@ $( function() {
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-	@if(empty($product->id))
-            {{ __('New Product') }}
+	@if(empty($setting->id))
+            {{ __('New Setting') }}
 	@else
-            {{ __('Edit Product') }}
+            {{ __('Edit Setting') }}
 	@endif
         </h2>
     </x-slot>
@@ -32,44 +32,28 @@ $( function() {
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 	        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
     			<div class="mt-6 text-gray-500">
-				<form name="save-product" action="/admin/saveproduct" method="post">
-				<input type="hidden" name="product_id" value="{{ $product->id }}" />	
+				<form name="save-setting" action="/admin/savesetting" method="post">
+				<input type="hidden" name="setting_id" value="{{ $setting->id }}" />	
 				@csrf	
 <div class="overflow-hidden sm:rounded-md">
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
        <div class="grid grid-cols-6 gap-6">
-        <!-- SKU -->
-        <div class="col-span-8 md:col-span-2">
-             <label class="block font-medium text-sm" for="sku">SKU</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="sku" name="sku" type="text" value="{{ $product->sku }}" >
-        </div>
-        <!-- Product Name -->
+        <!-- Settings Name -->
         <div class="col-span-8 md:col-span-4">
-             <label class="block font-medium text-sm" for="name">Name of the product <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" value="{{ $product->name }}" required>
+             <label class="block font-medium text-sm" for="name">Name of the setting <span style="color:#F1541E;">*</span></label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" value="{{ $setting->name }}" required>
         </div>
 	
         <!-- Price -->
         <div class="col-span-4" md:col-span-4">
-             <label class="block font-medium text-sm" for="price">Price <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="price" name="price" type="text" value="{{ $product->price }}" required>
-        </div>
-        <!-- Stock Quantity -->
-        <div class="col-span-8 md:col-span-2">
-             <label class="block font-medium text-sm" for="stock_quantity">Stock Quantity <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="stock_quantity" name="stock_quantity" type="text" value="{{ $product->stock_quantity }}" required>
-        </div>
-	
-	<!-- Unit -->
-        <div class="col-span-8 md:col-span-2">
-             <label class="block font-medium text-sm" for="unit">Unit <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="unit" name="unit" type="text" value="{{ $product->unit }}"required>
+             <label class="block font-medium text-sm" for="value">Value <span style="color:#F1541E;">*</span></label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="value" name="value" type="text" value="{{ $setting->value }}" required>
         </div>
 
         <!-- Description -->
         <div class="col-span-8">
              <label class="block font-medium text-sm" for="description">Description</label>
-             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text">{{ $product->description }}</textarea>
+             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text">{{ $setting->description }}</textarea>
         </div>
 
        </div>

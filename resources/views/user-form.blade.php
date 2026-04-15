@@ -44,13 +44,32 @@
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="password" name="password" type="text" value="" @if(empty($user->password)) required @endif>
         </div>
 	<!-- Person's Company -->
+        @php
+            $owner_entities_array = [];
+            foreach($owner_entities as $entity){
+                $owner_entities_array[] = $entity->entity_id;
+            }
+        @endphp
         <div class="col-span-4">
+            @if(empty($owner_entities_array))
+            <input type="hidden" name="select_option" value="">
+            @endif
              <label class="block font-medium text-sm" for="entity_id">Entities</label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id">
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id[]" multiple onChange="this.form.submit();">
 		@foreach($entities as $c)
-		<option value="{{ $c->id }}" @if($c->id == $user->entity_id) selected @endif>{{ $c->name }}</option>
+		<option value="{{ $c->id }}" @if(in_array($c->id,$owner_entities_array)) selected @endif>{{ $c->name }}</option>
 		@endforeach
 		</select>
+        </div>
+        <div class="col-span-8">
+             <label class="block font-medium text-sm" for="address">Choose Primary Entity</label>
+        @if(!empty($owner_entities_array))
+            @foreach($owner_entities as $entity)
+                <input type="radio" value="{{ $entity->entity_id }}" name="primary_entity" @if($entity->primary_entity == 1) checked @endif> {{ $entity->entity->name }} <br />
+            @endforeach
+        @else
+            <p style="color:#ef4b0e;">Please choose your entities then select primary entity. If you have a single entity then it will be considered as a primary entity.</p>
+        @endif
         </div>
 <!--
         <div class="col-span-8">

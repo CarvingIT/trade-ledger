@@ -1,14 +1,15 @@
 $(document).ready(function() {
-     $("#settings").DataTable(
+     $("#invoices").DataTable(
         {
         stateSave:true,
         "scrollX": true,
         columnDefs: [
-                        { width: '25%', targets: 0 },
-                        { width: '25%', targets: 1 },
-                        { width: '25%', targets: 2 },
-                        { width: '25%', targets: 3 },
-                        { "orderable": false, targets: 3 }
+                        { width: '20%', targets: 0 },
+                        { width: '10%', targets: 1 },
+                        { width: '15%', targets: 2 },
+                        { width: '13%', targets: 3 },
+                        { width: '13%', targets: 4 },
+                        { "orderable": false, targets: 4 }
                 ],
                 "lengthMenu": [ 100, 500, 1000 ],
                 "pageLength": 100,
@@ -19,9 +20,33 @@ $(document).ready(function() {
     }
         }
     );
+
+    $("#line_items").DataTable(
+        {
+        stateSave:true,
+        "scrollX": true,
+        columnDefs: [
+                        { width: '10%', targets: 0 },
+                        { width: '10%', targets: 1 },
+                        { width: '15%', targets: 2 },
+                        { width: '13%', targets: 3 },
+                ],
+                "lengthMenu": [ 100, 500, 1000 ],
+                "pageLength": 100,
+                fixedColumns: true,
+        initComplete: function () {
+        $('div.dataTables_filter input', this.api().table().container()).attr('id', 'mySearchInput');
+        $('div.dataTables_filter input', this.api().table().container()).attr('name', 'search_field');
+    }
+        }
+    );
+
+
+
+
 // New code to retain search value
 // Restore state
-    var table = $('#settings').val();
+    var table = $('#invoices').val();
     if(table){
     var state = table.state.loaded();
     if ( state ) {
@@ -51,10 +76,10 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
-    $(".delete_setting").click(function(){
-        const setting_id = $(this).data('setting-id');
-        //alert(setting_id);
-        $('#delete_setting_id').val(setting_id);
+    $(".delete_invoice").click(function(){
+        const invoice_id = $(this).data('invoice-id');
+        //alert(invoice_id);
+        $('#delete_invoice_id').val(invoice_id);
         $("#deletedialog").dialog({
             title:'Are you sure?',
             dialogClass: "alert"
@@ -62,7 +87,7 @@ $(document).ready(function(){
     });
     $(".do-not-delete").click(function() {
          // Execute the redirection function (allows user to use the back button)
-         window.location.href = '/admin/settings';
+         window.location.href = '/admin/invoices';
     });
 
     $(".admin-dropdown").click(function(){

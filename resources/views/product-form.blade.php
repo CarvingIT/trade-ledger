@@ -6,14 +6,6 @@
 <script src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/jquery-ui.js"></script>
 
-<script type="text/javascript">
-$( function() {
-    $( "#datepicker" ).datepicker();
-    $( "#datepicker1" ).datepicker();
-    $( "#datepicker2" ).datepicker();
-    $( "#datepicker3" ).datepicker();
-  } );
-</script>
 @endpush
 
 <x-app-layout>
@@ -63,8 +55,15 @@ $( function() {
 	<!-- Unit -->
         <div class="col-span-8 md:col-span-2">
              <label class="block font-medium text-sm" for="unit">Unit <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="unit" name="unit" type="text" value="{{ $product->unit }}"required>
+            <!-- Unit Id -->
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="unit" name="unit">
+                <option value=''>Choose Related Unit</option>
+        @foreach($units as $c)
+        <option value="{{ $c->id }}" @if($c->id == $product->unit) selected @endif>{{ $c->name }}</option>
+        @endforeach
+        </select>
         </div>
+
 
         <!-- Description -->
         <div class="col-span-8">

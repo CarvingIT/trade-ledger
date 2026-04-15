@@ -31,17 +31,9 @@ class SettingsController extends Controller
          else{
             $c = Setting::find($request->input('setting_id'));
          }
-         if(!empty($request->input('sku'))){
-            $c->sku = $request->input('sku');
-         }
-         else{
-            $c->sku = Str::uuid();
-         }
          $c->name = $request->input('name');
          $c->description = $request->input('description');
-         $c->price = $request->input('price');
-         $c->stock_quantity = $request->input('stock_quantity');
-         $c->unit = $request->input('unit');
+         $c->value = $request->input('value');
         try{
             $c->save();
             Session::flash('alert-success', 'Setting saved successfully!');
@@ -65,7 +57,7 @@ class SettingsController extends Controller
 
      public function viewSetting($setting_id){
         $setting = Setting::find($setting_id);
-        return view('productdetails', ['setting'=>$setting]);
+        return view('settingsdetails', ['setting'=>$setting]);
      }
 
 

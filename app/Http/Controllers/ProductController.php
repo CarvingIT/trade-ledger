@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Unit;
 use Session;
 use Illuminate\Support\Str;
 
@@ -22,7 +23,8 @@ class ProductController extends Controller
         else{
             $product = Product::find($product_id);
         }
-        return view('product-form', ['product'=>$product, 'activePage'=>'Product', 'titlePage'=>'Product']);
+        $units = Unit::all();
+        return view('product-form', ['product'=>$product, 'units'=>$units, 'activePage'=>'Product', 'titlePage'=>'Product']);
     }
 
     public function save(Request $request){
@@ -69,6 +71,14 @@ class ProductController extends Controller
         return view('productdetails', ['product'=>$product]);
         }
 
+    public function getProducts(){
+        $products = Product::all();
+        $products_array = [];
+        foreach($products as $p){
+            $products_array[$p->id]=$p->name;
+        }
+        return $products_array;
+    }
 
 // End of the Class
 }

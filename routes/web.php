@@ -34,6 +34,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/saveproduct','\App\Http\Controllers\ProductController@save');
         Route::post('/product/delete','\App\Http\Controllers\ProductController@deleteProduct');
         Route::get('/product/{product_id}','\App\Http\Controllers\ProductController@viewProduct');
+        Route::get('/get_products/ajax','\App\Http\Controllers\ProductController@getProducts');
 
         //Units
         Route::get('/units','\App\Http\Controllers\UnitController@index')->name('units');
@@ -55,6 +56,13 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/savesetting','\App\Http\Controllers\SettingsController@save');
         Route::post('/setting/delete','\App\Http\Controllers\SettingsController@deleteSetting');
         Route::get('/setting/{setting_id}','\App\Http\Controllers\SettingsController@viewSetting');
+
+        //Sale (Invoices/Bills)
+        Route::get('/invoices','\App\Http\Controllers\InvoicesController@index')->name('invoices');
+        Route::get('/invoice-form/{invoice_id}','\App\Http\Controllers\InvoicesController@addEditInvoice');
+        Route::post('/saveinvoice','\App\Http\Controllers\InvoicesController@save');
+        Route::post('/invoice/delete','\App\Http\Controllers\InvoicesController@deleteInvoice');
+        Route::get('/invoice/{invoice_id}','\App\Http\Controllers\InvoicesController@viewInvoice');
     });
 });
 

@@ -69,4 +69,9 @@ class User extends Authenticatable
         return false;
     }
 
+    public function entity(){
+        return $this->belongsTo(Entity::class, 'entity_id');
+    }
+
+
 }

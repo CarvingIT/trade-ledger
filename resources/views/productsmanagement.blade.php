@@ -44,7 +44,7 @@
                             <tr>
                             <th>Name</th>
 			                <th>SKU</th>
-			                <th>Price</th>
+			                <th>Rate (Unit Price)</th>
 			                <th>Stock Quantity</th>
 			                <th>Unit</th>
 			                <th>Description</th>
@@ -58,7 +58,7 @@
 			<td>{{ $c->sku }}</td>
 			<td>{{ $c->price }}</td>
 			<td>{{ $c->stock_quantity }}</td>
-			<td>{{ $c->unit }}</td>
+			<td>{{ $c->unit_detail->name }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
 			<td>
 				<a href="/admin/product/{{ $c->id }}" title="View Details"><span class="fas fa-eye" style="padding:5%;"></span></a>

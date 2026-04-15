@@ -37,7 +37,7 @@
                 &nbsp;
 				<a class="m-5" title="Export" href="/admin/export/currencies"><span class="fas fa-file-export"></span></a>
 			</div>
-    			<div class="mt-6 text-gray-900">
+    			<div class="mt-5 text-gray-900">
 			<div class="table-responsive">
                     <table id="currencies" class="display">
                         <thead class="text-primary">

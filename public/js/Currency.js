@@ -5,8 +5,8 @@ $(document).ready(function() {
         "scrollX": true,
         columnDefs: [
                         { width: '10%', targets: 0 },
-                        { width: '20%', targets: 1 },
-                        { width: '40%', targets: 2 },
+                        { width: '10%', targets: 1 },
+                        { width: '10%', targets: 2 },
                         { "orderable": false, targets: 2 }
                 ],
                 "lengthMenu": [ 100, 500, 1000 ],
