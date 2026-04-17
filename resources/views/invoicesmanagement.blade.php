@@ -46,6 +46,7 @@
 			                <th>Owner Entity</th>
 			                <th>Entity (Client)</th>
 			                <th>Description</th>
+			                <th>Total Amount</th>
                             <th class="text-right">Actions</th>
                             </tr>
                         </thead>
@@ -56,6 +57,7 @@
 			<td>{{ $c->owner_entity->name }}</td>
 			<td>{{ $c->entity->name }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
+			<td>{{ $c->total_amount }}</td>
 			<td>
 				<a href="/admin/invoice/{{ $c->id }}" title="View Details"><span class="fas fa-eye" style="padding:5%;"></span></a>
 				@if(Auth::user()->hasRole('admin'))

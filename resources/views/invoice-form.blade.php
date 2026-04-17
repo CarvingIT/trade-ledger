@@ -107,8 +107,8 @@ $("#line_items").DataTable(
                 @foreach($line_items as $line_item)
         <div class="col-span-8 md:col-span-2">
              <label class="block font-medium text-sm" for="item_name">Product Name: {{ $line_item->item_name }}</label>
+             <label class="block font-medium text-sm" for="rate">Rate: Rs. {{ $line_item->rate }} / {{ $line_item->product->unit_detail->name }}</label>
              <label class="block font-medium text-sm" for="quantity">Quantity: {{ $line_item->quantity }}</label>
-             <label class="block font-medium text-sm" for="rate">Rate: {{ $line_item->rate }}</label>
              <label class="block font-medium text-sm" for="amount">Amount: {{ $line_item->amount }}</label>
         </div>
                 @endforeach

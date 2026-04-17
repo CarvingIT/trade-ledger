@@ -6,14 +6,6 @@
 <script src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/jquery-ui.js"></script>
 
-<script type="text/javascript">
-$( function() {
-    $( "#datepicker" ).datepicker();
-    $( "#datepicker1" ).datepicker();
-    $( "#datepicker2" ).datepicker();
-    $( "#datepicker3" ).datepicker();
-  } );
-</script>
 @endpush
 
 <x-app-layout>
@@ -61,6 +53,11 @@ $( function() {
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="other_info" name="other_info" type="text" value="{{ $entity->other_info }}">
         </div>
 
+	<!-- GSTIN Number -->
+        <div class="col-span-8 md:col-span-2">
+             <label class="block font-medium text-sm" for="GSTIN_number">GSTIN Number</label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="GSTIN_number" name="GSTIN_number" type="text" value="{{ $entity->GSTIN_number }}">
+        </div>
 
         <!-- Description -->
         <div class="col-span-8">

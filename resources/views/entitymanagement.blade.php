@@ -45,6 +45,7 @@
                             <th>Name</th>
 			                <th>Email</th>
 			                <th>Phone</th>
+			                <th>GSTIN Number</th>
 			                <th>Description</th>
 			                <th>Other Info</th>
                             <th class="text-right">Actions</th>
@@ -56,6 +57,7 @@
 			<td>{{ $c->name }}</td>
 			<td>{{ $c->email }}</td>
 			<td>{{ $c->phone }}</td>
+			<td>{{ $c->GSTIN_number }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 50, $end='...') }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->other_info, 30, $end='...') }}</td>
 			<td>

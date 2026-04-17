@@ -36,6 +36,7 @@ class EntityController extends Controller
          $c->email = $request->input('email');
          $c->description = $request->input('description');
          $c->other_info = $request->input('other_info');
+         $c->GSTIN_number = $request->input('GSTIN_number');
         try{
             $c->save();
             Session::flash('alert-success', 'Entity saved successfully!');

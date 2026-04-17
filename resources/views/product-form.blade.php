@@ -43,7 +43,7 @@
 	
         <!-- Price -->
         <div class="col-span-4" md:col-span-4">
-             <label class="block font-medium text-sm" for="price">Price <span style="color:#F1541E;">*</span></label>
+             <label class="block font-medium text-sm" for="price">Price (in Rs.) <span style="color:#F1541E;">*</span></label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="price" name="price" type="text" value="{{ $product->price }}" required>
         </div>
         <!-- Stock Quantity -->

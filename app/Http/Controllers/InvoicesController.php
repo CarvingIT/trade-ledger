@@ -8,6 +8,8 @@ use App\Models\Entity;
 use App\Models\OwnerEntity;
 use App\Models\Product;
 use App\Models\LineItem;
+use App\Models\Setting;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Session;
 
 class InvoicesController extends Controller
@@ -78,6 +80,7 @@ exit;
                     $line_item = new LineItem();
                     $product_id = $product_items[$prod];
                     $product = Product::find($product_id);
+                    $line_item->product_id = $product_id;
                     $line_item->invoice_id = $c->id;
                     $line_item->item_name = $product->name;
                     $line_item->quantity = $qty;
@@ -113,9 +116,44 @@ exit;
      public function viewInvoice($invoice_id){
         $invoice = Invoice::find($invoice_id);
         $line_items = LineItem::where('invoice_id',$invoice_id)->get(); 
-        return view('invoicedetails', ['invoice'=>$invoice,'line_items'=>$line_items]);
-        }
+        $user_id = auth()->user()->id;
+        $owner_entity = OwnerEntity::where('user_id', $user_id)
+                        ->where('primary_entity','1')
+                        ->first();
+        $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
+                        ->where('name','GST')
+                        ->first();
+        $tax_number = str_replace('%', '', $tax_details->value);
 
+        $total_amount = $invoice->total_amount;
+        $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
+        return view('invoicedetails', ['invoice'=>$invoice, 'line_items'=>$line_items, 'tax_details'=>$tax_details,'total_amount_including_tax'=>$total_amount_including_tax]);
+        }
+    
+    public function downloadInvoicePDF($id){
+        $invoice = Invoice::findOrFail($id);
+        $line_items = LineItem::where('invoice_id',$id)->get();
+
+        $user_id = auth()->user()->id;
+        $owner_entity = OwnerEntity::where('user_id', $user_id)
+                        ->where('primary_entity','1')
+                        ->first();
+
+        $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
+                        ->where('name','GST')
+                        ->first();
+        $tax_number = str_replace('%', '', $tax_details->value);
+        $total_amount = $invoice->total_amount;
+        $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
+
+        $data = ['invoice' => $invoice,'line_items'=>$line_items,'tax'=>$tax_details, 'total_amount_including_tax'=>$total_amount_including_tax];
+
+        // Load the view and pass the data
+        $pdf = Pdf::loadView('invoices.pdf', $data);
+
+        // Download the PDF file
+        return $pdf->download('invoice-' . $invoice->id . '.pdf');
+        }
 
 
 // End of the Class

@@ -30,7 +30,8 @@
 	        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
 			<div class="text-right">
 				@if(Auth::user()->hasRole('admin'))
-                                <a title="Edit entity" href="/admin/invoice-form/{{$invoice->id}}"><span class="fas fa-pencil-alt m-1 fa-2x"></span></a>
+                               <a title="Edit invoice" href="/admin/invoice-form/{{$invoice->id}}"><span class="fas fa-pencil-alt m-1 fa-2x"></span></a>
+                               <a class="m-5" title="Export" href="/admin/invoice/{{ $invoice->id }}/download"><span class="fas fa-file-export fa-2x"></span></a> 
                                 @endif
                         </div>
 
@@ -62,16 +63,22 @@
 
         <!-- Price -->
         <div class="col-span-8 md:col-span-2">
-             <label class="block font-medium text-sm" for="total_amount">Total Amount</label>
+             <label class="block font-medium text-sm" for="total_amount">Total Amount of Items</label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="total_amount" name="total_amount" type="text" value="{{ $invoice->total_amount }}"  readonly style="background:#eee;">
         </div>
 
         <!-- Tax -->
         <div class="col-span-8 md:col-span-2">
              <label class="block font-medium text-sm" for="tax">Tax</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="tax" name="tax" type="text" value="{{ $invoice->tax }}"  readonly style="background:#eee;">
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="tax" name="tax" type="text" value="{{ $tax_details->name }} - {{ $tax_details->value }}"  readonly style="background:#eee;">
         </div>
 	
+        <!-- Total Amount with Tax -->
+        <div class="col-span-8 md:col-span-2">
+             <label class="block font-medium text-sm" for="total_amount">Total Amount including Tax (Rs.)</label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="total_amount_including_tax" name="total_amount_including_tax" type="text" value="{{ $total_amount_including_tax }}"  readonly style="background:#eee;">
+        </div>
+
         <!-- Description -->
         <div class="col-span-8">
              <label class="block font-medium text-sm" for="description">Description</label>
@@ -88,8 +95,8 @@
                 <thead>
                 <tr>
                     <th>Product Name</th>
-                    <th>Quantity</th>
                     <th>Rate</th>
+                    <th>Quantity</th>
                     <th>Amount</th>
                 </tr>
                 </thead>
@@ -97,8 +104,8 @@
                 @foreach($line_items as $line_item)
                 <tr>
                     <td>{{ $line_item->item_name }}</td>
+                    <td>Rs. {{ $line_item->rate }} / {{ $line_item->product->unit_detail->name }}</td>
                     <td>{{ $line_item->quantity }}</td>
-                    <td>{{ $line_item->rate }}</td>
                     <td>{{ $line_item->amount }}</td>
                 </tr>
                 @endforeach

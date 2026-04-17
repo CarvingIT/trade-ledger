@@ -63,6 +63,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/saveinvoice','\App\Http\Controllers\InvoicesController@save');
         Route::post('/invoice/delete','\App\Http\Controllers\InvoicesController@deleteInvoice');
         Route::get('/invoice/{invoice_id}','\App\Http\Controllers\InvoicesController@viewInvoice');
+        Route::get('/invoice/{id}/download','\App\Http\Controllers\InvoicesController@downloadInvoicePDF')->name('invoice.download');
     });
 });
 
