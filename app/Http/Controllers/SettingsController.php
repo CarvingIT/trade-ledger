@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Models\OwnerEntity;
 use Session;
 
 class SettingsController extends Controller
@@ -34,6 +35,11 @@ class SettingsController extends Controller
          $c->name = $request->input('name');
          $c->description = $request->input('description');
          $c->value = $request->input('value');
+         $user_id = auth()->user()->id;
+         $owner_entity = OwnerEntity::where('user_id', $user_id)
+                        ->where('primary_entity','1')
+                        ->first();
+         $c->owner_entity_id = $owner_entity->entity_id;
         try{
             $c->save();
             Session::flash('alert-success', 'Setting saved successfully!');

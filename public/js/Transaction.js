@@ -1,16 +1,18 @@
 $(document).ready(function() {
-     $("#invoices").DataTable(
+     $("#transactions").DataTable(
         {
         stateSave:true,
         "scrollX": true,
         columnDefs: [
-                        { width: '20%', targets: 0 },
-                        { width: '10%', targets: 1 },
-                        { width: '15%', targets: 2 },
+                        { width: '13%', targets: 0 },
+                        { width: '13%', targets: 1 },
+                        { width: '10%', targets: 2 },
                         { width: '13%', targets: 3 },
                         { width: '13%', targets: 4 },
-                        { width: '13%', targets: 5 },
-                        { "orderable": false, targets: 5 }
+                        { width: '10%', targets: 5 },
+                        { width: '14%', targets: 6 },
+                        { width: '10%', targets: 7 },
+                        { "orderable": false, targets: 7 }
                 ],
                 "lengthMenu": [ 100, 500, 1000 ],
                 "pageLength": 100,
@@ -47,7 +49,7 @@ $(document).ready(function() {
 
 // New code to retain search value
 // Restore state
-    var table = $('#invoices').val();
+    var table = $('#transactions').val();
     if(table){
     var state = table.state.loaded();
     if ( state ) {
@@ -77,10 +79,10 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
-    $(".delete_invoice").click(function(){
-        const invoice_id = $(this).data('invoice-id');
-        //alert(invoice_id);
-        $('#delete_invoice_id').val(invoice_id);
+    $(".delete_transaction").click(function(){
+        const transaction_id = $(this).data('transaction-id');
+        //alert(transaction_id);
+        $('#delete_transaction_id').val(transaction_id);
         $("#deletedialog").dialog({
             title:'Are you sure?',
             dialogClass: "alert"
@@ -88,7 +90,7 @@ $(document).ready(function(){
     });
     $(".do-not-delete").click(function() {
          // Execute the redirection function (allows user to use the back button)
-         window.location.href = '/admin/invoices';
+         window.location.href = '/admin/transactions';
     });
 
     $(".admin-dropdown").click(function(){

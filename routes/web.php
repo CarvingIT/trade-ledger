@@ -64,6 +64,22 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/invoice/delete','\App\Http\Controllers\InvoicesController@deleteInvoice');
         Route::get('/invoice/{invoice_id}','\App\Http\Controllers\InvoicesController@viewInvoice');
         Route::get('/invoice/{id}/download','\App\Http\Controllers\InvoicesController@downloadInvoicePDF')->name('invoice.download');
+        Route::get('/get_invoice_amount/ajax/{invoice_id}','\App\Http\Controllers\InvoicesController@getInvoiceAmount');
+        Route::get('/get_invoices/ajax/{entity_id}','\App\Http\Controllers\InvoicesController@getInvoices');
+
+        //Accounts
+        Route::get('/accounts','\App\Http\Controllers\AccountController@index')->name('accounts');
+        Route::get('/account-form/{account_id}','\App\Http\Controllers\AccountController@addEditAccount');
+        Route::post('/saveaccount','\App\Http\Controllers\AccountController@save');
+        Route::post('/account/delete','\App\Http\Controllers\AccountController@deleteAccount');
+        Route::get('/account/{account_id}','\App\Http\Controllers\AccountController@viewAccount');
+
+        //Transactions
+        Route::get('/transactions','\App\Http\Controllers\TransactionController@index')->name('transactions');
+        Route::get('/transaction-form/{transaction_id}','\App\Http\Controllers\TransactionController@addEditTransaction');
+        Route::post('/savetransaction','\App\Http\Controllers\TransactionController@save');
+        Route::post('/transaction/delete','\App\Http\Controllers\TransactionController@deleteTransaction');
+        Route::get('/transaction/{account_id}','\App\Http\Controllers\TransactionController@viewTransaction');
     });
 });
 

@@ -1,16 +1,14 @@
 $(document).ready(function() {
-     $("#invoices").DataTable(
+     $("#accounts").DataTable(
         {
         stateSave:true,
         "scrollX": true,
         columnDefs: [
-                        { width: '20%', targets: 0 },
-                        { width: '10%', targets: 1 },
-                        { width: '15%', targets: 2 },
-                        { width: '13%', targets: 3 },
-                        { width: '13%', targets: 4 },
-                        { width: '13%', targets: 5 },
-                        { "orderable": false, targets: 5 }
+                        { width: '25%', targets: 0 },
+                        { width: '25%', targets: 1 },
+                        { width: '25%', targets: 2 },
+                        { width: '25%', targets: 3 },
+                        { "orderable": false, targets: 3 }
                 ],
                 "lengthMenu": [ 100, 500, 1000 ],
                 "pageLength": 100,
@@ -21,33 +19,9 @@ $(document).ready(function() {
     }
         }
     );
-
-    $("#line_items").DataTable(
-        {
-        stateSave:true,
-        "scrollX": true,
-        columnDefs: [
-                        { width: '10%', targets: 0 },
-                        { width: '10%', targets: 1 },
-                        { width: '15%', targets: 2 },
-                        { width: '13%', targets: 3 },
-                ],
-                "lengthMenu": [ 100, 500, 1000 ],
-                "pageLength": 100,
-                fixedColumns: true,
-        initComplete: function () {
-        $('div.dataTables_filter input', this.api().table().container()).attr('id', 'mySearchInput');
-        $('div.dataTables_filter input', this.api().table().container()).attr('name', 'search_field');
-    }
-        }
-    );
-
-
-
-
 // New code to retain search value
 // Restore state
-    var table = $('#invoices').val();
+    var table = $('#accounts').val();
     if(table){
     var state = table.state.loaded();
     if ( state ) {
@@ -77,10 +51,10 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
-    $(".delete_invoice").click(function(){
-        const invoice_id = $(this).data('invoice-id');
-        //alert(invoice_id);
-        $('#delete_invoice_id').val(invoice_id);
+    $(".delete_account").click(function(){
+        const account_id = $(this).data('account-id');
+        //alert(account_id);
+        $('#delete_account_id').val(account_id);
         $("#deletedialog").dialog({
             title:'Are you sure?',
             dialogClass: "alert"
@@ -88,7 +62,7 @@ $(document).ready(function(){
     });
     $(".do-not-delete").click(function() {
          // Execute the redirection function (allows user to use the back button)
-         window.location.href = '/admin/invoices';
+         window.location.href = '/admin/accounts';
     });
 
     $(".admin-dropdown").click(function(){
