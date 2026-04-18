@@ -35,7 +35,7 @@
                 <a class="m-5" title="New company" href="/admin/entity-form/new"><span class="fas fa-plus"></span></a>
                 @endif
                 &nbsp;
-				<a class="m-5" title="Export" href="/admin/export/entities"><span class="fas fa-file-export"></span></a>
+				<!--a class="m-5" title="Export" href="/admin/export/entities"><span class="fas fa-file-export"></span></a-->
 			</div>
     			<div class="mt-6 text-gray-900">
 			<div class="table-responsive">

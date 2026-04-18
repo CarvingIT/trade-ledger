@@ -35,7 +35,7 @@
                 <a class="m-5" title="New Currency" href="/admin/currency-form/new"><span class="fas fa-plus"></span></a>
                 @endif
                 &nbsp;
-				<a class="m-5" title="Export" href="/admin/export/currencies"><span class="fas fa-file-export"></span></a>
+				<!--a class="m-5" title="Export" href="/admin/export/currencies"><span class="fas fa-file-export"></span></a-->
 			</div>
     			<div class="mt-5 text-gray-900">
 			<div class="table-responsive">

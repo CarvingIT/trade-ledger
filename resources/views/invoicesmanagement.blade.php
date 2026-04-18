@@ -35,7 +35,7 @@
                 <a class="m-5" title="New Invoice" href="/admin/invoice-form/new"><span class="fas fa-plus"></span></a>
                 @endif
                 &nbsp;
-				<a class="m-5" title="Export" href="/admin/export/invoices"><span class="fas fa-file-export"></span></a>
+				<!--a class="m-5" title="Export" href="/admin/export/invoices"><span class="fas fa-file-export"></span></a-->
 			</div>
 
     			<div class="mt-6 text-gray-900">
@@ -50,6 +50,7 @@
                 <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker1" name="end_date" type="text" value="@if(!empty($_GET)){{ $_GET['end_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
             </div>
             </form>
+            <br />
             @if(!empty($_GET) && !empty($_GET['start_date']) && !empty($_GET['end_date']))
                 <a class="m-5" title="Export Invoices" href="/admin/export/invoices_by_date?start_date={{ $_GET['start_date'] }}&end_date={{  $_GET['end_date'] }}">Export Invoices: <span class="fas fa-file-export"></span></a>
             @endif

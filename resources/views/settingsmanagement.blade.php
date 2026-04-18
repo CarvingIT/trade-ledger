@@ -35,7 +35,7 @@
                 <a class="m-5" title="New Product" href="/admin/setting-form/new"><span class="fas fa-plus"></span></a>
                 @endif
                 &nbsp;
-				<a class="m-5" title="Export" href="/admin/export/settings"><span class="fas fa-file-export"></span></a>
+				<!--a class="m-5" title="Export" href="/admin/export/settings"><span class="fas fa-file-export"></span></a-->
 			</div>
     			<div class="mt-6 text-gray-900">
 			<div class="table-responsive">
