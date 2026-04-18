@@ -66,6 +66,8 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/invoice/{id}/download','\App\Http\Controllers\InvoicesController@downloadInvoicePDF')->name('invoice.download');
         Route::get('/get_invoice_amount/ajax/{invoice_id}','\App\Http\Controllers\InvoicesController@getInvoiceAmount');
         Route::get('/get_invoices/ajax/{entity_id}','\App\Http\Controllers\InvoicesController@getInvoices');
+        Route::get('/export/invoices','\App\Http\Controllers\InvoicesController@exportInvoices');
+        Route::get('/export/invoices_by_date','\App\Http\Controllers\InvoicesController@exportInvoicesByDate');
 
         //Accounts
         Route::get('/accounts','\App\Http\Controllers\AccountController@index')->name('accounts');

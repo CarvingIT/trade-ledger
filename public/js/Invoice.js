@@ -1,3 +1,8 @@
+$( function() {
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker1" ).datepicker();
+  } );
+
 $(document).ready(function() {
      $("#invoices").DataTable(
         {
@@ -72,8 +77,23 @@ $(document).ready(function() {
         } );
     } );
     }
-
 //
+});
+
+$(document).ready(function(){
+    const form = document.getElementById("downloadInvoices");
+
+    const start_d = document.getElementById("datepicker");
+    start_d.addEventListener("change", function() {
+        // Submit the form automatically when the date value changes
+        form.submit();
+    });
+
+    const end_d = document.getElementById("datepicker1");
+    end_d.addEventListener("change", function() {
+        // Submit the form automatically when the date value changes
+        form.submit();
+    });
 });
 
 $(document).ready(function(){
