@@ -14,6 +14,10 @@ Route::view('profile', 'profile')
 
 Route::group(['prefix' => '/admin'], function () {
     Route::group(['middleware'=>'admin'], function(){
+
+        //Dashboard
+        Route::post('/save_current_entity','\App\Http\Controllers\DashboardController@setCurrentEntity');
+
         //Users
         Route::get('/users','\App\Http\Controllers\UserController@index')->name('users');
         Route::get('/user-form/{user_id}','\App\Http\Controllers\UserController@addEditUser');

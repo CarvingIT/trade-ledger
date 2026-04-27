@@ -62,13 +62,15 @@
 		</select>
         </div>
         <div class="col-span-8">
-             <label class="block font-medium text-sm" for="address">Choose Primary Entity</label>
+             <label class="block font-medium text-sm" for="address">My Entities</label>
         @if(!empty($owner_entities_array))
+            <ul>
             @foreach($owner_entities as $entity)
-                <input type="radio" value="{{ $entity->entity_id }}" name="primary_entity" @if($entity->primary_entity == 1) checked @endif> {{ $entity->entity->name }} <br />
+                <li>{{ $entity->entity->name }}</li>
             @endforeach
+            </ul>
         @else
-            <p style="color:#ef4b0e;">Please choose your entities then select primary entity. If you have a single entity then it will be considered as a primary entity.</p>
+            <p style="color:#ef4b0e;">Please choose your entities.  If you have a single entity then it will be considered as a primary entity.</p>
         @endif
         </div>
 <!--
