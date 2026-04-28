@@ -73,6 +73,18 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/export/invoices','\App\Http\Controllers\InvoicesController@exportInvoices');
         Route::get('/export/invoices_by_date','\App\Http\Controllers\InvoicesController@exportInvoicesByDate');
 
+        //Purchases 
+        Route::get('/purchases','\App\Http\Controllers\PurchaseController@index')->name('purchases');
+        Route::get('/purchase-form/{purchase_id}','\App\Http\Controllers\PurchaseController@addEditPurchase');
+        Route::post('/savepurchase','\App\Http\Controllers\PurchaseController@save');
+        Route::post('/purchase/delete','\App\Http\Controllers\PurchaseController@deletePurchase');
+        Route::get('/purchase/{purchase_id}','\App\Http\Controllers\PurchaseController@viewPurchase');
+        Route::get('/purchase/{id}/download','\App\Http\Controllers\PurchaseController@downloadPurchasePDF')->name('purchase.download');
+        Route::get('/get_purchase_amount/ajax/{purchase_id}','\App\Http\Controllers\PurchaseController@getPurchaseAmount');
+        Route::get('/get_purchases/ajax/{entity_id}','\App\Http\Controllers\PurchaseController@getPurchases');
+        Route::get('/export/purchases','\App\Http\Controllers\PurchaseController@exportPurchases');
+        Route::get('/export/purchases_by_date','\App\Http\Controllers\PurchaseController@exportPurchasesByDate');
+
         //Accounts
         Route::get('/accounts','\App\Http\Controllers\AccountController@index')->name('accounts');
         Route::get('/account-form/{account_id}','\App\Http\Controllers\AccountController@addEditAccount');
