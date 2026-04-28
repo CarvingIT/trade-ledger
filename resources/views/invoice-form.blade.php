@@ -113,7 +113,7 @@ $("#line_items").DataTable(
                 @endphp
             @endif
             @if(!empty($invoice->total_amount))
-             <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount: {{ $invoice->total_amount }} @if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)) <br />{{ $tax_details->name }}: {{ $tax_details->value }}<br /> Total Amount including tax: {{ $total_amount_including_tax }} @endif
+             <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount (in Rs.): {{ $invoice->total_amount }} @if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)) <br />{{ $invoice->tax_name }}: {{ $invoice->tax_value }}<br /> Total Amount including tax (in Rs.): {{ $total_amount_including_tax }} @endif
 </label>
             @endif
         </div>
@@ -122,7 +122,7 @@ $("#line_items").DataTable(
              <label class="block font-medium text-sm" for="item_name">Product Name: {{ $line_item->item_name }}</label>
              <label class="block font-medium text-sm" for="rate">Rate: Rs. {{ $line_item->rate }} / {{ $line_item->product->unit_detail->name }}</label>
              <label class="block font-medium text-sm" for="quantity">Quantity: {{ $line_item->quantity }}</label>
-             <label class="block font-medium text-sm" for="amount">Amount: {{ $line_item->amount }}</label>
+             <label class="block font-medium text-sm" for="amount">Amount (in Rs.): {{ $line_item->amount }}</label>
         </div>
                 @endforeach
        </div>

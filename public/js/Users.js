@@ -2,7 +2,7 @@ $(document).ready(function() {
      $("#users").DataTable(
         {
         stateSave:true,
-        "scrollX": true,
+        //"scrollX": true,
         columnDefs: [
             { width: '15%', targets: 0 },
             { width: '16%', targets: 1 },

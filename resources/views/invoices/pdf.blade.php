@@ -50,11 +50,11 @@
                 @endforeach
                 <tr>
                     <th class="text-right">Total Amount</th>
-                    <td colspan="3" class="text-right">{{ $invoice->total_amount }}</td>
+                    <td colspan="3" class="text-right">Rs. {{ $invoice->total_amount }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">Tax</th>
-                    <td colspan="3" class="text-right">{{ $tax->name }} - {{ $tax->value }} </td>
+                    <td colspan="3" class="text-right">{{ @$invoice->tax_name }} - {{ @$invoice->tax_value }} </td>
                 </tr>
                 <tr>
                     <th class="text-right">Total Amount including Tax</th>

@@ -2,11 +2,8 @@ $(document).ready(function() {
      $("#currencies").DataTable(
         {
         stateSave:true,
-        "scrollX": true,
         columnDefs: [
                         { width: '10%', targets: 0 },
-                        { width: '10%', targets: 1 },
-                        { width: '20%', targets: 2 },
                         { "orderable": false, targets: 2 }
                 ],
                 "lengthMenu": [ 100, 500, 1000 ],

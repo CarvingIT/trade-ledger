@@ -2,7 +2,7 @@ $(document).ready(function() {
      $("#transactions").DataTable(
         {
         stateSave:true,
-        "scrollX": true,
+        //"scrollX": true,
         columnDefs: [
                         { width: '13%', targets: 0 },
                         { width: '13%', targets: 1 },

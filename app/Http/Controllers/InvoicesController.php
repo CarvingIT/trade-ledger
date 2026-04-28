@@ -35,6 +35,7 @@ class InvoicesController extends Controller
         $line_items = LineItem::where('invoice_id',$invoice_id)->get(); 
 
         //Apply GST to the Client if the owner has GSTIN Number in entities table and in Settings table GST value is there for the same entity.
+        /*
         $user_id = auth()->user()->id;
         $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')
@@ -42,14 +43,15 @@ class InvoicesController extends Controller
         $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
                         ->where('name','GST')
                         ->first();
-        if(!empty($tax_details->value)){
-            $tax_number = str_replace('%', '', $tax_details->value);
+        */
+        if(!empty($invoice->tax_value) && $invoice->tax_name=='GST'){
+            $tax_number = str_replace('%', '', $invoice->tax_value);
         }
         else{
             $tax_number = 0;
         }
 
-        return view('invoice-form', ['invoice'=>$invoice, 'entities'=>$entities, 'products'=>$products, 'line_items'=>$line_items, 'tax_number'=>$tax_number, 'tax_details'=>$tax_details, 'activePage'=>'Invoice', 'titlePage'=>'Invoice']);
+        return view('invoice-form', ['invoice'=>$invoice, 'entities'=>$entities, 'products'=>$products, 'line_items'=>$line_items, 'tax_number'=>$tax_number, 'activePage'=>'Invoice', 'titlePage'=>'Invoice']);
     }
 
     public function save(Request $request){
@@ -77,13 +79,25 @@ exit;
          }
          $c->title = $request->input('title');
          $c->description = $request->input('description');
-         $c->entity_id = $request->input('entity_id'); //Client entity id
+         $c->entity_id = $request->input('entity_id');                       //Client entity id
          $user_id = auth()->user()->id;
          $owner_entity = OwnerEntity::where('user_id', $user_id)
-                        ->where('primary_entity','1')
+                        ->where('primary_entity','1')                       //Primary meaning Current entity.
                         ->first();
-         $c->owner_entity_id = $owner_entity->entity_id;
-         $c->save();
+        $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
+                        ->where('name','GST')
+                        ->first();
+        if(!empty($tax_details->value)){
+            $tax_number = str_replace('%', '', $tax_details->value);
+        }
+        else{
+            $tax_number = 0;
+        }
+
+        $c->owner_entity_id = $owner_entity->entity_id;
+        $c->tax_name = $tax_details->name;
+        $c->tax_value = $tax_details->value;
+        $c->save();
 
          // Line Items 
             if($c->total_amount > 0){
@@ -92,6 +106,7 @@ exit;
             else{
                 $total_amount = 0;
             }
+
          $product_items = $request->product_id;
          if(!empty($request->product_id) && !empty($request->quantity)){
                 foreach($request->quantity as $prod=>$qty){
@@ -136,6 +151,7 @@ exit;
         $line_items = LineItem::where('invoice_id',$invoice_id)->get(); 
 
         //Apply GST to the Client if the owner has GSTIN Number in entities table and in Settings table GST value is there for the same entity.
+        /*
         $user_id = auth()->user()->id;
         $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')
@@ -143,7 +159,13 @@ exit;
         $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
                         ->where('name','GST')
                         ->first();
-        $tax_number = str_replace('%', '', $tax_details->value);
+        */
+        if(!empty($invoice->tax_value) && $invoice->tax_name=='GST'){
+        $tax_number = str_replace('%', '', $invoice->tax_value);
+        }
+        else{
+        $tax_number = '';
+        }
         $total_amount = $invoice->total_amount;
 
         //Check if the Owner Entity has GSTIN number  
@@ -152,7 +174,7 @@ exit;
         if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)){
         $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
         }
-        return view('invoicedetails', ['invoice'=>$invoice, 'line_items'=>$line_items, 'tax_details'=>$tax_details,'total_amount_including_tax'=>$total_amount_including_tax]);
+        return view('invoicedetails', ['invoice'=>$invoice, 'line_items'=>$line_items, 'total_amount_including_tax'=>$total_amount_including_tax]);
         }
     
     public function downloadInvoicePDF($id){
@@ -160,6 +182,7 @@ exit;
         $line_items = LineItem::where('invoice_id',$id)->get();
 
         //Apply GST to the Client if the owner has GSTIN Number in entities table and in Settings table GST value is there for the same entity.
+        /*
         $user_id = auth()->user()->id;
         $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')
@@ -168,7 +191,14 @@ exit;
         $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
                         ->where('name','GST')
                         ->first();
-        $tax_number = str_replace('%', '', $tax_details->value);
+        */
+        if(!empty($invoice->tax_value) && $invoice->tax_name=='GST'){
+        $tax_number = str_replace('%', '', $invoice->tax_value);
+        }
+        else{
+        $tax_number = '';
+        }
+
         $total_amount = $invoice->total_amount;
 
         //Check if the Owner Entity has GSTIN number 
@@ -178,7 +208,7 @@ exit;
         $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
         }
 
-        $data = ['invoice' => $invoice,'line_items'=>$line_items,'tax'=>$tax_details, 'total_amount_including_tax'=>$total_amount_including_tax];
+        $data = ['invoice' => $invoice,'line_items'=>$line_items,'total_amount_including_tax'=>$total_amount_including_tax];
 
         // Load the view and pass the data
         $pdf = Pdf::loadView('invoices.pdf', $data);
@@ -190,6 +220,8 @@ exit;
         public function getInvoiceAmount($invoice_id){
             $invoice = Invoice::find($invoice_id);
             $line_items = LineItem::where('invoice_id',$invoice_id)->get(); 
+
+            /*
             $user_id = auth()->user()->id;
             $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')
@@ -197,16 +229,23 @@ exit;
             $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
                         ->where('name','GST')
                         ->first();
-            $tax_number = str_replace('%', '', $tax_details->value);
+            */
+            if(!empty($invoice->tax_value) && $invoice->tax_name=='GST'){
+                $tax_number = str_replace('%', '', $invoice->tax_value);
+            }
+            else{
+                $tax_number = '';
+            }
 
             $total_amount = $invoice->total_amount;
+
         //Check if the Owner Entity has GSTIN number 
-        $owner_entity_details = Entity::find($invoice->owner_entity_id);
-        $total_amount_including_tax = $total_amount;
-        if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)){
-            $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
-        }
-            return  json_encode(['tax_name'=>$tax_details->name, 'tax_value'=>$tax_details->value, 'total_amount'=>$total_amount, 'total_amount_including_tax'=>$total_amount_including_tax]);
+            $owner_entity_details = Entity::find($invoice->owner_entity_id);
+            $total_amount_including_tax = $total_amount;
+            if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)){
+                $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
+            }
+            return  json_encode(['tax_name'=>$tax_details->name, 'tax_value'=>$invoice->tax_value, 'total_amount'=>$total_amount, 'total_amount_including_tax'=>$total_amount_including_tax]);
         }
             
         public function getInvoices($entity_id){
@@ -221,37 +260,37 @@ exit;
         public function exportInvoicesByDate(Request $request){
             $start_date = $request->start_date;
             $end_date = $request->end_date; 
-            $start_date = date('Y-m-d', strtotime($request->input('start_date')));
-            $end_date = date('Y-m-d', strtotime($request->input('end_date')));
+            $start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
+            $end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
 
-            $invoices = Invoice::where('created_at','>=',$start_date)
-                        ->where('created_at','<=',$end_date)
+
+            $invoices = Invoice::whereBetween('created_at', [$start_date, $end_date])
                         ->get();
-
-            $user_id = auth()->user()->id;
-            $owner_entity = OwnerEntity::where('user_id', $user_id)
-                        ->where('primary_entity','1')
-                        ->first();
-            $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
-                        ->where('name','GST')
-                        ->first();
-            $tax_number = str_replace('%', '', $tax_details->value);
 
 
             $export_invoices = [];
             foreach($invoices as $inv){
-            $total_amount = $inv->total_amount;
-            //Check if the Owner Entity has GSTIN number 
-            $owner_entity_details = Entity::find($inv->owner_entity_id);
-            $total_amount_including_tax = $total_amount;
-            if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)){
-                $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
-            }
-                $export_invoices[] = [$inv->created_at, $inv->owner_entity->name, $inv->title, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $tax_details->name, $tax_details->value, $inv->description];
+                if(!empty($inv->tax_value) && $inv->tax_name == 'GST'){
+                    $tax_number = str_replace('%', '', $inv->tax_value);
+                }
+                else{
+                    $tax_number = '';
+                }
+                $total_amount = $inv->total_amount;
+
+                //Check if the Owner Entity has GSTIN number 
+                $owner_entity_details = Entity::find($inv->owner_entity_id);
+                $total_amount_including_tax = $total_amount;
+                if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)){
+                    $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
+                }
+
+                $export_invoices[] = [$inv->created_at, $inv->owner_entity->name, $inv->title, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
             }
 
             $file_name = 'Invoices.xlsx';
             return Excel::download(new InvoicesExport($export_invoices), $file_name);
         }
+
 // End of the Class
 }

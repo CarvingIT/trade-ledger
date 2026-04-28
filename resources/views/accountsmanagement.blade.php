@@ -42,7 +42,6 @@
                     <table id="accounts" class="display">
                         <thead class="text-primary">
                             <tr>
-                            <th>ID</th>
                             <th>Name</th>
 			                <th>Owner Entity</th>
 			                <th>Description</th>
@@ -52,7 +51,6 @@
                         <tbody>
 			@foreach ($accounts as $c)
         		<tr>
-			<td>{{ $c->id }}</td>
 			<td>{{ $c->name }}</td>
 			<td>{{ $c->owner_entity->name }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
