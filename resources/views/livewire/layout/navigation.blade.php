@@ -33,15 +33,18 @@ new class extends Component
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(auth()->user()->hasRole('admin'))
                     <x-nav-link :href="route('users')" :active="request()->routeIs('users')" wire:navigate>
                         {{ __('Users') }}
                     </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('entities')" :active="request()->routeIs('entities')" wire:navigate>
                         {{ __('Entities') }}
                     </x-nav-link>
                     <x-nav-link :href="route('products')" :active="request()->routeIs('products')" wire:navigate>
                         {{ __('Products') }}
                     </x-nav-link>
+                    @if(auth()->user()->hasRole('admin'))
                     <x-nav-link :href="route('units')" :active="request()->routeIs('units')" wire:navigate>
                         {{ __('Units') }}
                     </x-nav-link>
@@ -51,6 +54,7 @@ new class extends Component
                     <x-nav-link :href="route('settings')" :active="request()->routeIs('settings')" wire:navigate>
                         {{ __('Settings') }}
                     </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('invoices')" :active="request()->routeIs('invoices')" wire:navigate>
                         {{ __('Invoices') }}
                     </x-nav-link>

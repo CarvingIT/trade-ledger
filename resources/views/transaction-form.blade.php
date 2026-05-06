@@ -145,7 +145,7 @@ $("#line_items").DataTable(
 
         <!-- Client's Invoices -->
         <div class="col-span-4">
-             <label class="block font-medium text-sm" for="entity_id">Invoices<span style="color:#F1541E;">*</span></label>
+             <label class="block font-medium text-sm" for="entity_id">Invoices<span style="color:#F1541E;">*</span></label><p>Client Invoices wouldbe listed here</p>
              <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_id" name="invoice_id" onChange="getTotalAmount(this.value);" required>
             <option value="">Choose Invoice</option>
         {{--
@@ -175,8 +175,8 @@ $("#line_items").DataTable(
 
         <!-- Description -->
         <div class="col-span-8">
-             <label class="block font-medium text-sm" for="description">Description</label>
-             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text">{{ $transaction->description }}</textarea>
+             <label class="block font-medium text-sm" for="description">Description<span style="color:#F1541E;">*</span></label>
+             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text" required>{{ $transaction->description }}</textarea>
         </div>
         
 {{--
@@ -200,16 +200,17 @@ $("#line_items").DataTable(
 <!--button type="button" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-bold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray m-1" style="background:#000;"  onclick="newLineItem();">Add New Line Item</button-->
 
 
-@if(Auth::user()->hasRole('admin'))
+{{--@if(Auth::user()->hasRole('admin'))--}}
     <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
      <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 m-1" wire:loading.attr="disabled">
     Save
      </button>
+    &nbsp;
      <button type="button" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 m-1" wire:loading.attr="disabled" onclick="window.history.back();">
     Cancel
      </button>
    </div>
-@endif
+{{--@endif--}}
                             </div>
 				</form>
                         </div>

@@ -13,17 +13,7 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::group(['prefix' => '/admin'], function () {
-    Route::group(['middleware'=>'admin'], function(){
-
-        //Dashboard
-        Route::post('/save_current_entity','\App\Http\Controllers\DashboardController@setCurrentEntity');
-
-        //Users
-        Route::get('/users','\App\Http\Controllers\UserController@index')->name('users');
-        Route::get('/user-form/{user_id}','\App\Http\Controllers\UserController@addEditUser');
-        Route::post('/saveuser','\App\Http\Controllers\UserController@save');
-        Route::post('/user/delete','\App\Http\Controllers\UserController@deleteUser');
-        Route::get('/user/{user_id}','\App\Http\Controllers\UserController@viewUser');
+    Route::group(['middleware'=>'auth'], function(){
 
         //Entities
         Route::get('/entities','\App\Http\Controllers\EntityController@index')->name('entities');
@@ -39,27 +29,6 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/product/delete','\App\Http\Controllers\ProductController@deleteProduct');
         Route::get('/product/{product_id}','\App\Http\Controllers\ProductController@viewProduct');
         Route::get('/get_products/ajax','\App\Http\Controllers\ProductController@getProducts');
-
-        //Units
-        Route::get('/units','\App\Http\Controllers\UnitController@index')->name('units');
-        Route::get('/unit-form/{unit_id}','\App\Http\Controllers\UnitController@addEditUnit');
-        Route::post('/saveunit','\App\Http\Controllers\UnitController@save');
-        Route::post('/unit/delete','\App\Http\Controllers\UnitController@deleteUnit');
-        Route::get('/unit/{unit_id}','\App\Http\Controllers\UnitController@viewUnit');
-
-        //Currencies
-        Route::get('/currencies','\App\Http\Controllers\CurrencyController@index')->name('currencies');
-        Route::get('/currency-form/{currency_id}','\App\Http\Controllers\CurrencyController@addEditCurrency');
-        Route::post('/savecurrency','\App\Http\Controllers\CurrencyController@save');
-        Route::post('/currency/delete','\App\Http\Controllers\CurrencyController@deleteCurrency');
-        Route::get('/currency/{currency_id}','\App\Http\Controllers\CurrencyController@viewCurrency');
-
-        //Settings
-        Route::get('/settings','\App\Http\Controllers\SettingsController@index')->name('settings');
-        Route::get('/setting-form/{setting_id}','\App\Http\Controllers\SettingsController@addEditSetting');
-        Route::post('/savesetting','\App\Http\Controllers\SettingsController@save');
-        Route::post('/setting/delete','\App\Http\Controllers\SettingsController@deleteSetting');
-        Route::get('/setting/{setting_id}','\App\Http\Controllers\SettingsController@viewSetting');
 
         //Sale (Invoices/Bills)
         Route::get('/invoices','\App\Http\Controllers\InvoicesController@index')->name('invoices');
@@ -98,6 +67,44 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/savetransaction','\App\Http\Controllers\TransactionController@save');
         Route::post('/transaction/delete','\App\Http\Controllers\TransactionController@deleteTransaction');
         Route::get('/transaction/{account_id}','\App\Http\Controllers\TransactionController@viewTransaction');
+    });
+});
+
+Route::group(['prefix' => '/admin'], function () {
+    Route::group(['middleware'=>'admin'], function(){
+
+        //Dashboard
+        Route::post('/save_current_entity','\App\Http\Controllers\DashboardController@setCurrentEntity');
+
+        //Users
+        Route::get('/users','\App\Http\Controllers\UserController@index')->name('users');
+        Route::get('/user-form/{user_id}','\App\Http\Controllers\UserController@addEditUser');
+        Route::post('/saveuser','\App\Http\Controllers\UserController@save');
+        Route::post('/user/delete','\App\Http\Controllers\UserController@deleteUser');
+        Route::get('/user/{user_id}','\App\Http\Controllers\UserController@viewUser');
+
+
+        //Units
+        Route::get('/units','\App\Http\Controllers\UnitController@index')->name('units');
+        Route::get('/unit-form/{unit_id}','\App\Http\Controllers\UnitController@addEditUnit');
+        Route::post('/saveunit','\App\Http\Controllers\UnitController@save');
+        Route::post('/unit/delete','\App\Http\Controllers\UnitController@deleteUnit');
+        Route::get('/unit/{unit_id}','\App\Http\Controllers\UnitController@viewUnit');
+
+        //Currencies
+        Route::get('/currencies','\App\Http\Controllers\CurrencyController@index')->name('currencies');
+        Route::get('/currency-form/{currency_id}','\App\Http\Controllers\CurrencyController@addEditCurrency');
+        Route::post('/savecurrency','\App\Http\Controllers\CurrencyController@save');
+        Route::post('/currency/delete','\App\Http\Controllers\CurrencyController@deleteCurrency');
+        Route::get('/currency/{currency_id}','\App\Http\Controllers\CurrencyController@viewCurrency');
+
+        //Settings
+        Route::get('/settings','\App\Http\Controllers\SettingsController@index')->name('settings');
+        Route::get('/setting-form/{setting_id}','\App\Http\Controllers\SettingsController@addEditSetting');
+        Route::post('/savesetting','\App\Http\Controllers\SettingsController@save');
+        Route::post('/setting/delete','\App\Http\Controllers\SettingsController@deleteSetting');
+        Route::get('/setting/{setting_id}','\App\Http\Controllers\SettingsController@viewSetting');
+
     });
 });
 

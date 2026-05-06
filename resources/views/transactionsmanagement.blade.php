@@ -31,9 +31,9 @@
 
 	        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
 			<div class="text-right">
-				@if(Auth::user()->hasRole('admin'))
+				{{--@if(Auth::user()->hasRole('admin'))--}}
                 <a class="m-5" title="New Invoice" href="/admin/transaction-form/new"><span class="fas fa-plus"></span></a>
-                @endif
+                {{--@endif--}}
                 &nbsp;
 				<!--a class="m-5" title="Export" href="/admin/export/transactions"><span class="fas fa-file-export"></span></a-->
 			</div>
@@ -64,10 +64,10 @@
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
 			<td>
 				<a href="/admin/transaction/{{ $c->id }}" title="View Details"><span class="fas fa-eye" style="padding:5%;"></span></a>
-				@if(Auth::user()->hasRole('admin'))
+				{{--@if(Auth::user()->hasRole('admin'))--}}
 				<a href="/admin/transaction-form/{{ $c->id }}" title="Edit"><span class="fas fa-pencil-alt" style="padding:5%;"></span></a>
 				<button id="opener" class="delete_transaction" data-transaction-id="{{ $c->id }}" title="Delete"><span class="fas fa-trash-alt"></span></button>
-				@endif
+				{{--@endif--}}
 
 	    <div id="deletedialog" style="display:none;" class="bg-grey">
                 <form name="deletetransaction" method="post" action="/admin/transaction/delete">
