@@ -51,7 +51,6 @@ class UserController extends Controller
         try{
         $u->save();
         $referer = 'admin/user-form/'.$u->id;
-        /*
         //Below code shifted to dashboard
         if(!empty($request->entity_id)){
             foreach($request->entity_id as $entity_id){
@@ -68,6 +67,7 @@ class UserController extends Controller
                 }
                 $entity->user_id = $request->input('user_id');
                 $entity->entity_id = $entity_id;
+        /*
                 if($request->primary_entity == $entity_id){
                 $entity->primary_entity = 1;
                 $referer = '/admin/users';
@@ -75,10 +75,10 @@ class UserController extends Controller
                 else{
                 $entity->primary_entity = 0;
                 }
+        */
                 $entity->save();
             }
         }
-        */
         Session::flash('alert-success','User details saved successfully');
         }
         catch(\Exception $e){
