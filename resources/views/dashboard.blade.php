@@ -26,7 +26,7 @@
 
                     <form name="save-current-entity" action="/admin/save_current_entity" method="post">
                     @csrf
-                    <div class="col-span-3">
+                    <div class="col-span-8">
                         <label class="block font-medium " for="address">Choose your current Entity</label>
                              @if(!empty($owner_entities_array))
                                  @foreach($owner_entities as $entity)
