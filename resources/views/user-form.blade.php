@@ -50,7 +50,7 @@
                 $owner_entities_array[] = $entity->entity_id;
             }
         @endphp
-        <div class="col-span-4">
+        <div class="col-span-8">
             @if(empty($owner_entities_array))
             <input type="hidden" name="select_option" value="">
             @endif
