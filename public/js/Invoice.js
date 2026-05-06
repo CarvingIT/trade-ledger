@@ -7,7 +7,7 @@ $(document).ready(function() {
      $("#invoices").DataTable(
         {
         stateSave:true,
-        //"scrollX": true,
+        "scrollX": true,
         columnDefs: [
                         { width: '20%', targets: 0 },
                         { width: '10%', targets: 1 },

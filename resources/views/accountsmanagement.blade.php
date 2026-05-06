@@ -38,7 +38,8 @@
 				<!--a class="m-5" title="Export" href="/admin/export/products"><span class="fas fa-file-export"></span></a-->
 			</div>
     			<div class="mt-6 text-gray-900">
-			<div class="table-responsive">
+			<!--div class="table-responsive"-->
+			<div>
                     <table id="accounts" class="display">
                         <thead class="text-primary">
                             <tr>

@@ -118,6 +118,40 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+                    @if(auth()->user()->hasRole('admin'))
+                    <x-responsive-nav-link :href="route('users')" :active="request()->routeIs('users')" wire:navigate>
+                        {{ __('Users') }}
+                    </x-responsive-nav-link>
+                    @endif
+                    <x-responsive-nav-link :href="route('entities')" :active="request()->routeIs('entities')" wire:navigate>
+                        {{ __('Entities') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('products')" :active="request()->routeIs('products')" wire:navigate>
+                        {{ __('Products') }}
+                    </x-responsive-nav-link>
+                    @if(auth()->user()->hasRole('admin'))
+                    <x-responsive-nav-link :href="route('units')" :active="request()->routeIs('units')" wire:navigate>
+                        {{ __('Units') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('currencies')" :active="request()->routeIs('currencies')" wire:navigate>
+                        {{ __('Currencies') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('settings')" :active="request()->routeIs('settings')" wire:navigate>
+                        {{ __('Settings') }}
+                    </x-responsive-nav-link>
+                    @endif
+                    <x-responsive-nav-link :href="route('invoices')" :active="request()->routeIs('invoices')" wire:navigate>
+                        {{ __('Invoices') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('accounts')" :active="request()->routeIs('accounts')" wire:navigate>
+                        {{ __('Accounts') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('transactions')" :active="request()->routeIs('transactions')" wire:navigate>
+                        {{ __('Transactions') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('purchases')" :active="request()->routeIs('purchases')" wire:navigate>
+                        {{ __('Purchases') }}
+                    </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
