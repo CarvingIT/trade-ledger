@@ -29,10 +29,10 @@
                @endforeach
 	        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
 			<div class="text-right">
-				@if(Auth::user()->hasRole('admin'))
+				{{--@if(Auth::user()->hasRole('admin'))--}}
                                <a title="Edit invoice" href="/admin/invoice-form/{{$invoice->id}}"><span class="fas fa-pencil-alt m-1 fa-2x"></span></a>
                                <a class="m-5" title="Export" href="/admin/invoice/{{ $invoice->id }}/download" target="_blank"><span class="fas fa-file-export fa-2x"></span></a> 
-                                @endif
+                                {{--@endif--}}
                         </div>
 
     			<div class="mt-6 text-gray-500">
