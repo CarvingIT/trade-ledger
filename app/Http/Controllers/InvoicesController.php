@@ -80,14 +80,14 @@ exit;
                         ->first();
          if(!empty($tax_details->value)){
             $tax_number = str_replace('%', '', $tax_details->value);
+        	$c->tax_name = $tax_details->name;
+        	$c->tax_value = $tax_details->value;
          }
          else{
             $tax_number = 0;
          }
 
         $c->owner_entity_id = $owner_entity->entity_id;
-        $c->tax_name = $tax_details->name;
-        $c->tax_value = $tax_details->value;
         $c->save();
 
          // Line Items 
