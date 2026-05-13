@@ -13,17 +13,10 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::group(['prefix' => '/admin'], function () {
-    Route::group(['middleware'=>'admin'], function(){
+    Route::group(['middleware'=>'auth'], function(){
 
         //Dashboard
         Route::post('/save_current_entity','\App\Http\Controllers\DashboardController@setCurrentEntity');
-
-        //Users
-        Route::get('/users','\App\Http\Controllers\UserController@index')->name('users');
-        Route::get('/user-form/{user_id}','\App\Http\Controllers\UserController@addEditUser');
-        Route::post('/saveuser','\App\Http\Controllers\UserController@save');
-        Route::post('/user/delete','\App\Http\Controllers\UserController@deleteUser');
-        Route::get('/user/{user_id}','\App\Http\Controllers\UserController@viewUser');
 
         //Entities
         Route::get('/entities','\App\Http\Controllers\EntityController@index')->name('entities');
@@ -39,6 +32,58 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/product/delete','\App\Http\Controllers\ProductController@deleteProduct');
         Route::get('/product/{product_id}','\App\Http\Controllers\ProductController@viewProduct');
         Route::get('/get_products/ajax','\App\Http\Controllers\ProductController@getProducts');
+
+        //Sale (Invoices/Bills)
+        Route::get('/invoices','\App\Http\Controllers\InvoicesController@index')->name('invoices');
+        Route::get('/invoice-form/{invoice_id}','\App\Http\Controllers\InvoicesController@addEditInvoice');
+        Route::post('/saveinvoice','\App\Http\Controllers\InvoicesController@save');
+        Route::post('/invoice/delete','\App\Http\Controllers\InvoicesController@deleteInvoice');
+        Route::get('/invoice/{invoice_id}','\App\Http\Controllers\InvoicesController@viewInvoice');
+        Route::get('/invoice/{id}/download','\App\Http\Controllers\InvoicesController@downloadInvoicePDF')->name('invoice.download');
+        Route::get('/get_invoice_amount/ajax/{invoice_id}','\App\Http\Controllers\InvoicesController@getInvoiceAmount');
+        Route::get('/get_invoices/ajax/{entity_id}','\App\Http\Controllers\InvoicesController@getInvoices');
+        Route::get('/export/invoices','\App\Http\Controllers\InvoicesController@exportInvoices');
+        Route::get('/export/invoices_by_date','\App\Http\Controllers\InvoicesController@exportInvoicesByDate');
+
+        //Purchases 
+        Route::get('/purchases','\App\Http\Controllers\PurchaseController@index')->name('purchases');
+        Route::get('/purchase-form/{purchase_id}','\App\Http\Controllers\PurchaseController@addEditPurchase');
+        Route::post('/savepurchase','\App\Http\Controllers\PurchaseController@save');
+        Route::post('/purchase/delete','\App\Http\Controllers\PurchaseController@deletePurchase');
+        Route::get('/purchase/{purchase_id}','\App\Http\Controllers\PurchaseController@viewPurchase');
+        Route::get('/purchase/{id}/download','\App\Http\Controllers\PurchaseController@downloadPurchasePDF')->name('purchase.download');
+        Route::get('/get_purchase_amount/ajax/{purchase_id}','\App\Http\Controllers\PurchaseController@getPurchaseAmount');
+        Route::get('/get_purchases/ajax/{entity_id}','\App\Http\Controllers\PurchaseController@getPurchases');
+        Route::get('/export/purchases','\App\Http\Controllers\PurchaseController@exportPurchases');
+        Route::get('/export/purchases_by_date','\App\Http\Controllers\PurchaseController@exportPurchasesByDate');
+
+        //Accounts
+        Route::get('/accounts','\App\Http\Controllers\AccountController@index')->name('accounts');
+        Route::get('/account-form/{account_id}','\App\Http\Controllers\AccountController@addEditAccount');
+        Route::post('/saveaccount','\App\Http\Controllers\AccountController@save');
+        Route::post('/account/delete','\App\Http\Controllers\AccountController@deleteAccount');
+        Route::get('/account/{account_id}','\App\Http\Controllers\AccountController@viewAccount');
+
+        //Transactions
+        Route::get('/transactions','\App\Http\Controllers\TransactionController@index')->name('transactions');
+        Route::get('/transaction-form/{transaction_id}','\App\Http\Controllers\TransactionController@addEditTransaction');
+        Route::post('/savetransaction','\App\Http\Controllers\TransactionController@save');
+        Route::post('/transaction/delete','\App\Http\Controllers\TransactionController@deleteTransaction');
+        Route::get('/transaction/{account_id}','\App\Http\Controllers\TransactionController@viewTransaction');
+    });
+});
+
+Route::group(['prefix' => '/admin'], function () {
+    Route::group(['middleware'=>'admin'], function(){
+
+
+        //Users
+        Route::get('/users','\App\Http\Controllers\UserController@index')->name('users');
+        Route::get('/user-form/{user_id}','\App\Http\Controllers\UserController@addEditUser');
+        Route::post('/saveuser','\App\Http\Controllers\UserController@save');
+        Route::post('/user/delete','\App\Http\Controllers\UserController@deleteUser');
+        Route::get('/user/{user_id}','\App\Http\Controllers\UserController@viewUser');
+
 
         //Units
         Route::get('/units','\App\Http\Controllers\UnitController@index')->name('units');
@@ -61,31 +106,6 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/setting/delete','\App\Http\Controllers\SettingsController@deleteSetting');
         Route::get('/setting/{setting_id}','\App\Http\Controllers\SettingsController@viewSetting');
 
-        //Sale (Invoices/Bills)
-        Route::get('/invoices','\App\Http\Controllers\InvoicesController@index')->name('invoices');
-        Route::get('/invoice-form/{invoice_id}','\App\Http\Controllers\InvoicesController@addEditInvoice');
-        Route::post('/saveinvoice','\App\Http\Controllers\InvoicesController@save');
-        Route::post('/invoice/delete','\App\Http\Controllers\InvoicesController@deleteInvoice');
-        Route::get('/invoice/{invoice_id}','\App\Http\Controllers\InvoicesController@viewInvoice');
-        Route::get('/invoice/{id}/download','\App\Http\Controllers\InvoicesController@downloadInvoicePDF')->name('invoice.download');
-        Route::get('/get_invoice_amount/ajax/{invoice_id}','\App\Http\Controllers\InvoicesController@getInvoiceAmount');
-        Route::get('/get_invoices/ajax/{entity_id}','\App\Http\Controllers\InvoicesController@getInvoices');
-        Route::get('/export/invoices','\App\Http\Controllers\InvoicesController@exportInvoices');
-        Route::get('/export/invoices_by_date','\App\Http\Controllers\InvoicesController@exportInvoicesByDate');
-
-        //Accounts
-        Route::get('/accounts','\App\Http\Controllers\AccountController@index')->name('accounts');
-        Route::get('/account-form/{account_id}','\App\Http\Controllers\AccountController@addEditAccount');
-        Route::post('/saveaccount','\App\Http\Controllers\AccountController@save');
-        Route::post('/account/delete','\App\Http\Controllers\AccountController@deleteAccount');
-        Route::get('/account/{account_id}','\App\Http\Controllers\AccountController@viewAccount');
-
-        //Transactions
-        Route::get('/transactions','\App\Http\Controllers\TransactionController@index')->name('transactions');
-        Route::get('/transaction-form/{transaction_id}','\App\Http\Controllers\TransactionController@addEditTransaction');
-        Route::post('/savetransaction','\App\Http\Controllers\TransactionController@save');
-        Route::post('/transaction/delete','\App\Http\Controllers\TransactionController@deleteTransaction');
-        Route::get('/transaction/{account_id}','\App\Http\Controllers\TransactionController@viewTransaction');
     });
 });
 

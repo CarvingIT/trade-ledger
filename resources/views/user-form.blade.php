@@ -21,15 +21,17 @@
 <div class="overflow-hidden sm:rounded-md">
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
 	<!-- Checkbox whether to send email to client or not -->
+        <!--
         <div class="col-span-4" md:col-span-4">
              <input id="send_email" name="send_email" type="checkbox" value="1">
              <label class=" font-medium text-sm" for="send_email">Send a Welcome Email to the Client</label>
         </div>
+        -->
 	<br />
        <div class="grid grid-cols-6 gap-6">
 
         <!-- User Name -->
-        <div class="col-span-3">
+        <div class="col-span-8">
              <label class="block font-medium text-sm" for="name">Name</label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="firstname" name="firstname" type="text" value="{{ $user->name }}" >
         </div>
@@ -50,7 +52,7 @@
                 $owner_entities_array[] = $entity->entity_id;
             }
         @endphp
-        <div class="col-span-4">
+        <div class="col-span-8">
             @if(empty($owner_entities_array))
             <input type="hidden" name="select_option" value="">
             @endif

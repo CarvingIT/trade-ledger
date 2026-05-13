@@ -50,7 +50,8 @@ class TransactionController extends Controller
          $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')
                         ->first();
-         $c->owner_entity_id = $owner_entity->entity_id;
+         $invoice_details = Invoice::find($request->input('invoice_id'));
+         $c->owner_entity_id = $invoice_details->owner_entity_id;
         try{
             $c->save();
             Session::flash('alert-success', 'Transaction saved successfully!');

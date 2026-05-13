@@ -31,14 +31,15 @@
 
 	        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
 			<div class="text-right">
-				@if(Auth::user()->hasRole('admin'))
-                <a class="m-5" title="New Product" href="/admin/account-form/new"><span class="fas fa-plus"></span></a>
-                @endif
+				{{--@if(Auth::user()->hasRole('admin'))--}}
+                <a class="m-5" title="New Account" href="/admin/account-form/new"><span class="fas fa-plus"></span></a>
+                {{--@endif--}}
                 &nbsp;
 				<!--a class="m-5" title="Export" href="/admin/export/products"><span class="fas fa-file-export"></span></a-->
 			</div>
     			<div class="mt-6 text-gray-900">
-			<div class="table-responsive">
+			<!--div class="table-responsive"-->
+			<div>
                     <table id="accounts" class="display">
                         <thead class="text-primary">
                             <tr>
@@ -56,10 +57,10 @@
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
 			<td>
 				<a href="/admin/account/{{ $c->id }}" title="View Details"><span class="fas fa-eye" style="padding:5%;"></span></a>
-				@if(Auth::user()->hasRole('admin'))
+				{{--@if(Auth::user()->hasRole('admin'))--}}
 				<a href="/admin/account-form/{{ $c->id }}" title="Edit"><span class="fas fa-pencil-alt" style="padding:5%;"></span></a>
 				<button id="opener" class="delete_account" data-account-id="{{ $c->id }}" title="Delete"><span class="fas fa-trash-alt"></span></button>
-				@endif
+				{{--@endif--}}
 
 	    <div id="deletedialog" style="display:none;" class="bg-grey">
                 <form name="deleteaccount" method="post" action="/admin/account/delete">
