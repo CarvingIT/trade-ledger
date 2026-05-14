@@ -45,6 +45,11 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/export/invoices','\App\Http\Controllers\InvoicesController@exportInvoices');
         Route::get('/export/invoices_by_date','\App\Http\Controllers\InvoicesController@exportInvoicesByDate');
 
+        //Invoice LineItems
+        Route::get('/line-item-form/{item_id}', '\App\Http\Controllers\LineItemController@editLineItem');
+        Route::post('/savelineitem', '\App\Http\Controllers\LineItemController@saveLineItem');
+        Route::post('/lineitem/delete', '\App\Http\Controllers\LineItemController@deleteLineItem');
+
         //Purchases 
         Route::get('/purchases','\App\Http\Controllers\PurchaseController@index')->name('purchases');
         Route::get('/purchase-form/{purchase_id}','\App\Http\Controllers\PurchaseController@addEditPurchase');

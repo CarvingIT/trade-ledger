@@ -5,6 +5,7 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/jquery-ui.js"></script>
+<script src="/js/Invoice.js"></script>
 
 <script type="text/javascript">
 var count=0;
@@ -79,6 +80,13 @@ $("#line_items").DataTable(
 <div class="overflow-hidden sm:rounded-md">
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
        <div class="grid grid-cols-6 gap-6">
+             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                   @if(Session::has('alert-' . $msg))
+                    <div class="mt-6 text-gray-900 leading-7 font-semibold ">
+                                <span @if($msg == 'danger') style="color:red" @endif>{{ Session::get('alert-' . $msg) }}</span>
+                    </div>
+                   @endif
+               @endforeach
         <!-- Title -->
         <div class="col-span-8 md:col-span-4">
              <label class="block font-medium text-sm" for="title">Title<span style="color:#F1541E;">*</span></label>
@@ -117,14 +125,7 @@ $("#line_items").DataTable(
 </label>
             @endif
         </div>
-                @foreach($line_items as $line_item)
-        <div class="col-span-8 md:col-span-2">
-             <label class="block font-medium text-sm" for="item_name">Product Name: {{ $line_item->item_name }}</label>
-             <label class="block font-medium text-sm" for="rate">Rate: Rs. {{ $line_item->rate }} / {{ $line_item->product->unit_detail->name }}</label>
-             <label class="block font-medium text-sm" for="quantity">Quantity: {{ $line_item->quantity }}</label>
-             <label class="block font-medium text-sm" for="amount">Amount (in Rs.): {{ $line_item->amount }}</label>
-        </div>
-                @endforeach
+
        </div>
     </div>
         
@@ -150,6 +151,33 @@ $("#line_items").DataTable(
 {{--@endif--}}
                             </div>
 				</form>
+</div>
+        <div class="col-span-8 md:col-span-2">
+            <h2 class="text-2xl font-bold">Line Items</h2>
+                @foreach($line_items as $line_item)
+                <div class="text-right">
+                <a href="/admin/line-item-form/{{ $line_item->id }}" title="Edit"><span class="fas fa-pencil-alt"></span></a>
+                <button id="opener" class="delete_lineitem" data-lineitem-id="{{ $line_item->id }}" title="Delete"><span class="fas fa-trash-alt"></span></button>
+                </div>
+        <div id="deletedialog" style="display:none;" class="bg-grey">
+                <form name="deletelineitem" method="post" action="/admin/lineitem/delete">
+                @csrf
+                <input type="hidden" id="delete_lineitem_id" name="lineitem_id" value="{{ $line_item->id }}" />
+            This action can not be undone.
+            <div class="flex items-center justify-end px-4 py-3 sm:px-6">
+                <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 m-1" wire:loading.attr="disabled">Delete</button>
+                <button type="button" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 m-1 do-not-delete" wire:loading.attr="disabled" id="cancel-delete">Cancel</button>
+            </div>
+                </form>
+         </div>
+                
+        <div class="col-span-1 md:col-span-1">
+             <label class="block font-medium text-sm" for="item_name">Product Name: {{ $line_item->item_name }}</label>
+             <label class="block font-medium text-sm" for="rate">Rate: Rs. {{ $line_item->rate }} / {{ $line_item->product->unit_detail->name }}</label>
+             <label class="block font-medium text-sm" for="quantity">Quantity: {{ $line_item->quantity }}</label>
+             <label class="block font-medium text-sm" for="amount">Amount (in Rs.): {{ $line_item->amount }}</label>
+        </div>
+                @endforeach
                         </div>
                 </div>
             </div>
