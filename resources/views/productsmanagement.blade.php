@@ -45,7 +45,7 @@
                             <th>Name</th>
 			                <th>SKU</th>
 			                <th>Rate (Unit Price)</th>
-			                <th>Stock Quantity</th>
+			                <!--th>Stock Quantity</th-->
 			                <th>Unit</th>
 			                <th>Description</th>
                             <th class="text-right">Actions</th>
@@ -57,7 +57,7 @@
 			<td>{{ $c->name }}</td>
 			<td>{{ $c->sku }}</td>
 			<td>{{ $c->price }}</td>
-			<td>{{ $c->stock_quantity }}</td>
+			<!--td>{{ $c->stock_quantity }}</td-->
 			<td>{{ $c->unit_detail->name }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
 			<td>

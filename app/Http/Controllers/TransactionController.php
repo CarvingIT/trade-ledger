@@ -24,8 +24,10 @@ class TransactionController extends Controller
         }
         else{
             $transaction = Transaction::find($transaction_id);
+            $invoices = Invoice::where('entity_id', $transaction->entity_id) 
+                        ->get();
         }
-        $invoices = Invoice::all();
+        //$invoices = Invoice::all();
         $accounts = Account::all();
         $entities = Entity::all();
         return view('transaction-form', ['transaction'=>$transaction, 'invoices'=>$invoices, 'accounts'=>$accounts, 'entities'=>$entities, 'activePage'=>'Transaction', 'titlePage'=>'Transaction']);
@@ -80,6 +82,17 @@ class TransactionController extends Controller
         $entities = Entity::all();
         return view('transactiondetails', ['transaction'=>$transaction, 'invoices'=>$invoices, 'accounts'=>$accounts, 'entities'=>$entities]);
      }
+
+    public function getTransactionInvoices($entity_id){
+            $invoices = Invoice::where('entity_id',$entity_id)->get();
+            $invoices_array = [];
+            foreach($invoices as $inv){
+                $invoices_array[$inv->id]=$inv->title;
+            }
+            return $invoices_array;
+    }
+
+
 
 
 //Class ends

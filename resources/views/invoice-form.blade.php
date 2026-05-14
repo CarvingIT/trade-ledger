@@ -84,12 +84,12 @@ $("#line_items").DataTable(
              <label class="block font-medium text-sm" for="title">Title<span style="color:#F1541E;">*</span></label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="title" name="title" type="text" value="{{ $invoice->title }}" required>
         </div>
-        
         <!-- Client's Company -->
         <div class="col-span-4">
              <label class="block font-medium text-sm" for="entity_id">Client Entity<span style="color:#F1541E;">*</span></label>
              <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" required>
         @foreach($entities as $c)
+            @php if(auth()->user()->get_current_entity($c->id) == 1) continue;  @endphp
         <option value="{{ $c->id }}" @if($c->id == $invoice->entity_id) selected @endif>{{ $c->name }}</option>
         @endforeach
         </select>

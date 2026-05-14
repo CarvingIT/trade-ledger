@@ -27,7 +27,7 @@ class DashboardController extends Controller
                 }
                 try{
                 $owner_entity->save();
-                Session::flash('alert-success','Current entity saved successfully');
+                Session::flash('alert-success','Current organization has been set successfully');
                 }
                 catch(\Exception $e){
                 Session::flash('alert-danger','There is some error please try again'.$e->getMessage());

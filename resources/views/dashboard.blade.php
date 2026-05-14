@@ -10,6 +10,16 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                   @if(Session::has('alert-' . $msg))
+                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                    <div class="mt-6 text-gray-900 leading-7 font-semibold ">
+                                <span @if($msg == 'danger') style="color:red" @endif>{{ Session::get('alert-' . $msg) }}</span>
+                </div>
+                        </div>
+                   @endif
+               @endforeach
+
                     <div class="clear">&nbsp;</div>
                     @php
                         $owner_entities_array = [];

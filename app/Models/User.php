@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
 use App\Models\UserRole;
+use App\Models\OwnerEntity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
@@ -71,6 +72,18 @@ class User extends Authenticatable
 
     public function entity(){
         return $this->belongsTo(Entity::class, 'entity_id');
+    }
+
+    public function get_current_entity($entity_id){
+        $entity = OwnerEntity::where('user_id', $this->id)
+                ->where('entity_id', $entity_id)
+                ->first();
+        if(!empty($entity->primary_entity)){
+        return $entity->primary_entity;
+        }
+        else{
+        return 0;
+        }
     }
 
 

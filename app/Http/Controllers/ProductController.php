@@ -43,7 +43,7 @@ class ProductController extends Controller
          $c->name = $request->input('name');
          $c->description = $request->input('description');
          $c->price = $request->input('price');
-         $c->stock_quantity = $request->input('stock_quantity');
+         //$c->stock_quantity = $request->input('stock_quantity');
          $c->unit = $request->input('unit');
         try{
             $c->save();

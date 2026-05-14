@@ -47,10 +47,12 @@
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="price" name="price" type="text" value="{{ $product->price }}" required>
         </div>
         <!-- Stock Quantity -->
+        <!--
         <div class="col-span-8 md:col-span-2">
              <label class="block font-medium text-sm" for="stock_quantity">Stock Quantity <span style="color:#F1541E;">*</span></label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="stock_quantity" name="stock_quantity" type="text" value="{{ $product->stock_quantity }}" required>
         </div>
+        -->
 	
 	<!-- Unit -->
         <div class="col-span-8 md:col-span-2">
