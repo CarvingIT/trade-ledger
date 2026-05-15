@@ -58,8 +58,6 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/purchase/{purchase_id}','\App\Http\Controllers\PurchaseController@viewPurchase');
         Route::get('/purchase/{id}/download','\App\Http\Controllers\PurchaseController@downloadPurchasePDF')->name('purchase.download');
         Route::get('/get_purchase_amount/ajax/{purchase_id}','\App\Http\Controllers\PurchaseController@getPurchaseAmount');
-        Route::get('/get_purchases/ajax/{entity_id}','\App\Http\Controllers\PurchaseController@getPurchases');
-        Route::get('/export/purchases','\App\Http\Controllers\PurchaseController@exportPurchases');
         Route::get('/export/purchases_by_date','\App\Http\Controllers\PurchaseController@exportPurchasesByDate');
 
         //Accounts
@@ -75,6 +73,8 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/savetransaction','\App\Http\Controllers\TransactionController@save');
         Route::post('/transaction/delete','\App\Http\Controllers\TransactionController@deleteTransaction');
         Route::get('/transaction/{account_id}','\App\Http\Controllers\TransactionController@viewTransaction');
+        Route::get('/export/transactions_by_date','\App\Http\Controllers\TransactionController@exportTransactionsByDate');
+
     });
 });
 

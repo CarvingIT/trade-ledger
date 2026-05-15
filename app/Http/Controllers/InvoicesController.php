@@ -254,10 +254,8 @@ exit;
             $start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
             $end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
 
-
             $invoices = Invoice::whereBetween('created_at', [$start_date, $end_date])
                         ->get();
-
 
             $export_invoices = [];
             foreach($invoices as $inv){

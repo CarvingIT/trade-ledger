@@ -8,6 +8,8 @@ use App\Models\Entity;
 use App\Models\OwnerEntity;
 use App\Models\Invoice;
 use App\Models\Account;
+use App\Exports\PaymentTransactionExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Session;
 
 class TransactionController extends Controller
@@ -21,13 +23,13 @@ class TransactionController extends Controller
     public function addEditTransaction($transaction_id){
         if($transaction_id == 'new'){
             $transaction = new Transaction();
+            $invoices = Invoice::all();
         }
         else{
             $transaction = Transaction::find($transaction_id);
             $invoices = Invoice::where('entity_id', $transaction->entity_id) 
                         ->get();
         }
-        //$invoices = Invoice::all();
         $accounts = Account::all();
         $entities = Entity::all();
         return view('transaction-form', ['transaction'=>$transaction, 'invoices'=>$invoices, 'accounts'=>$accounts, 'entities'=>$entities, 'activePage'=>'Transaction', 'titlePage'=>'Transaction']);
@@ -91,6 +93,25 @@ class TransactionController extends Controller
             }
             return $invoices_array;
     }
+
+    public function exportTransactionsByDate(Request $request){
+            $start_date = $request->start_date;
+            $end_date = $request->end_date;
+            $start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
+            $end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
+
+            $transactions = Transaction::whereBetween('created_at', [$start_date, $end_date])
+                        ->get();
+
+            $export_transactions = [];
+            foreach($transactions as $trans){
+
+                $export_transactions[] = [$trans->created_at, $trans->invoice_id, $trans->entity->name, $trans->owner_entity->name, $trans->total_amount, $trans->account->name, $trans->status];
+            }
+
+            $file_name = 'Payments.xlsx';
+            return Excel::download(new PaymentTransactionExport($export_transactions), $file_name);
+        }
 
 
 

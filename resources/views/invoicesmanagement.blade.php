@@ -39,12 +39,13 @@
 			</div>
 
     			<div class="mt-6 text-gray-900">
+
             <form name="invoices_export" action="/admin/invoices" method="GET" id="downloadInvoices">
-                <div class="col-span-4 md:col-span-2">
+                <div class="col-span-4">
                 <label class="block font-medium text-sm" for="datepicker">Start Date </label>
                 <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker" name="start_date" type="text" value="@if(!empty($_GET)){{ $_GET['start_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
                 </div>
-                <div class="col-span-4 md:col-span-2">
+                <div class="col-span-4">
                 <label class="block font-medium text-sm" for="datepicker1">End Date </label>
                 <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker1" name="end_date" type="text" value="@if(!empty($_GET)){{ $_GET['end_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
                 </div>
@@ -59,7 +60,7 @@
                     <table id="invoices" class="display">
                         <thead class="text-primary">
                             <tr>
-                            <th>Title</th>
+                            <!--th>Title</th-->
 			                <th>Owner Entity</th>
 			                <th>Entity (Client)</th>
 			                <th>Description</th>
@@ -72,7 +73,7 @@
                         <tbody>
 			@foreach ($invoices as $c)
         		<tr>
-			<td>{{ $c->title }}</td>
+			<!--td>{{ $c->title }}</td-->
 			<td>{{ $c->owner_entity->name }}</td>
 			<td>{{ $c->entity->name }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>

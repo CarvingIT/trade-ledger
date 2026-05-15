@@ -88,10 +88,12 @@ $("#line_items").DataTable(
                    @endif
                @endforeach
         <!-- Title -->
+        <!--
         <div class="col-span-8 md:col-span-4">
              <label class="block font-medium text-sm" for="title">Title<span style="color:#F1541E;">*</span></label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="title" name="title" type="text" value="{{ $invoice->title }}" required>
         </div>
+        -->
         <!-- Client's Company -->
         <div class="col-span-4">
              <label class="block font-medium text-sm" for="entity_id">Client Entity<span style="color:#F1541E;">*</span></label>
@@ -152,8 +154,8 @@ $("#line_items").DataTable(
                             </div>
 				</form>
 </div>
+        <div class="clear">&nbsp;</div>
         <div class="col-span-8 md:col-span-2">
-            <h2 class="text-2xl font-bold">Line Items</h2>
                 @foreach($line_items as $line_item)
                 <div class="text-right">
                 <a href="/admin/line-item-form/{{ $line_item->id }}" title="Edit"><span class="fas fa-pencil-alt"></span></a>

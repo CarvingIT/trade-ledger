@@ -1,3 +1,9 @@
+$( function() {
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker1" ).datepicker();
+  } );
+
+
 $(document).ready(function() {
      $("#transactions").DataTable(
         {

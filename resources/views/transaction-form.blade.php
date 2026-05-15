@@ -155,7 +155,7 @@ $("#line_items").DataTable(
         </select>
         </div>
         <!-- Total Amount -->
-        <div class="col-span-8 md:col-span-2">
+        <div class="col-span-4 md:col-span-2">
              <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount (including tax if applicable) <span style="color:#F1541E;">*</span></label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="total_amount" name="total_amount" type="text" value="{{ $transaction->total_amount }}" required>
             <div id="toggle_tax" style="display:none">
