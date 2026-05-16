@@ -278,7 +278,7 @@ exit;
                 $export_invoices[] = [$inv->created_at, $inv->owner_entity->name, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
             }
 
-            $file_name = 'Invoices.xlsx';
+            $file_name = 'Invoices_'.time().'.xlsx';
             return Excel::download(new InvoicesExport($export_invoices), $file_name);
         }
 

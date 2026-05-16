@@ -33,7 +33,8 @@
     			<div class="mt-6 text-gray-500">
 				<form name="save-lineitem" action="/admin/savelineitem" method="post">
 				<input type="hidden" name="lineitem_id" value="{{ $lineitem->id }}" />	
-				<input type="hidden" name="invoice_id" value="{{ $lineitem->invoice_id }}" />	
+				<input type="hidden" name="invoice_id" value="{{ @$lineitem->invoice_id }}" />	
+				<input type="hidden" name="purchase_id" value="{{ @$lineitem->purchase_id }}" />	
 				@csrf	
 <div class="overflow-hidden sm:rounded-md">
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">

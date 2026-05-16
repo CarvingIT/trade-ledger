@@ -282,7 +282,7 @@ exit;
                 $export_purchases[] = [$inv->created_at, $inv->owner_entity->name, $inv->title, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
             }
 
-            $file_name = 'Purchases.xlsx';
+            $file_name = 'Purchases_'.time().'.xlsx';
             return Excel::download(new PurchasesExport($export_purchases), $file_name);
         }
 

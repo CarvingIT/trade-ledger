@@ -79,14 +79,16 @@ $("#line_items").DataTable(
 				@csrf	
 <div class="overflow-hidden sm:rounded-md">
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
-       <div class="grid grid-cols-6 gap-6">
+
              @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                    @if(Session::has('alert-' . $msg))
                     <div class="mt-6 text-gray-900 leading-7 font-semibold ">
-                                <span @if($msg == 'danger') style="color:red" @endif>{{ Session::get('alert-' . $msg) }}</span>
+                                <span @if($msg == 'danger') style="color:red"  @else style="color:green" @endif>{{ Session::get('alert-' . $msg) }}</span>
                     </div>
                    @endif
-               @endforeach
+             @endforeach
+        <div class="clear">&nbsp;</div>
+       <div class="grid grid-cols-6 gap-6">
         <!-- Title -->
         <!--
         <div class="col-span-8 md:col-span-4">

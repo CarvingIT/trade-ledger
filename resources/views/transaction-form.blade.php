@@ -97,9 +97,9 @@ $("#line_items").DataTable(
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
 	@if(empty($transaction->id))
-            {{ __('New Payment') }}
+            {{ __('New Payment/Transaction') }}
 	@else
-            {{ __('Edit Payment') }}
+            {{ __('Edit Payment/Transaction') }}
 	@endif
         </h2>
     </x-slot>
@@ -146,7 +146,7 @@ $("#line_items").DataTable(
         <!-- Client's Invoices -->
         <div class="col-span-4">
              <label class="block font-medium text-sm" for="entity_id">Invoice ID<span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="total_amount" name="total_amount" type="text" value="{{ $transaction->invoice_id }}" required>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_id" name="invoice_id" type="text" value="{{ $transaction->invoice_id }}" onChange="getTotalAmount(this.value);" required>
         </div>
 
         <!-- Total Amount -->
