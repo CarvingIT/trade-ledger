@@ -84,7 +84,9 @@ class UserController extends Controller
        // ->with('entity')
         ->first();
         $entities = Entity::orderBy('name')->get();
-        return view('userdetails', ['user'=>$user, 'entities'=>$entities, 'activePage'=>'Users','titlePage'=>'Users']);
+        $user_id = $request->user_id;
+        $owner_entities = OwnerEntity::where('user_id', $user_id)->get();
+        return view('userdetails', ['user'=>$user, 'entities'=>$entities, 'owner_entities'=>$owner_entities, 'activePage'=>'Users','titlePage'=>'Users']);
         }
 
 

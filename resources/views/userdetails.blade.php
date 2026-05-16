@@ -69,11 +69,17 @@
         </div>
         -->
 	<!-- Person's Company -->
+        @php
+            $owner_entities_array = [];
+            foreach($owner_entities as $entity){
+                $owner_entities_array[] = $entity->entity_id;
+            }
+        @endphp
         <div class="col-span-4">
              <label class="block font-medium text-sm" for="entity_id">Entity</label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" readonly style="background:#eee;">
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" readonly style="background:#eee;" multiple>
 		@foreach($entities as $c)
-		<option value="{{ $c->id }}" @if($c->id == $user->entity_id) selected @endif>{{ $c->name }}</option>
+		<option value="{{ $c->id }}" @if(in_array($c->id, $owner_entities_array)) selected @endif>{{ $c->name }}</option>
 		@endforeach
 		</select>
         </div>
