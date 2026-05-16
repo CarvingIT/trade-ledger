@@ -40,22 +40,23 @@
 
     			<div class="mt-6 text-gray-900">
             <form name="purchases_export" action="/admin/purchases" method="GET" id="downloadPurchases">
-                <div class="col-span-4 md:col-span-2">
+                <div class="col-span-4" style="float:left; padding-right:1%;">
              <label class="block font-medium text-sm" for="datepicker">Start Date </label>
                 <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker" name="start_date" type="text" value="@if(!empty($_GET)){{ $_GET['start_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
         </div>
-    <br />
-        <div class="col-span-4 md:col-span-2">
+        <div class="col-span-4" style="float:left;">
              <label class="block font-medium text-sm" for="datepicker1">End Date </label>
                 <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker1" name="end_date" type="text" value="@if(!empty($_GET)){{ $_GET['end_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
             </div>
             </form>
-            <br />
+            <div class="clear">&nbsp;</div>
             @if(!empty($_GET) && !empty($_GET['start_date']) && !empty($_GET['end_date']))
-                <a class="m-5" title="Export Purchases" href="/admin/export/purchases_by_date?start_date={{ $_GET['start_date'] }}&end_date={{  $_GET['end_date'] }}">Export Purchases: <span class="fas fa-file-export"></span></a>
+                <a class="m-5" title="Export Purchases" href="/admin/export/purchases_by_date?start_date={{ $_GET['start_date'] }}&end_date={{  $_GET['end_date'] }}"><span class="fas fa-file-export fa-2x"></span></a>
             @endif
 
             <div id="clear">&nbsp;</div>
+            <div class="clear">&nbsp;</div>
+            <br />
 			<div class="table-responsive">
                     <table id="purchases" class="display">
                         <thead class="text-primary">

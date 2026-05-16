@@ -240,12 +240,13 @@ exit;
         }
             
         public function getInvoices($entity_id){
-            $invoices = Invoice::where('entity_id',$entity_id)->get();
+            $invoices = Invoice::where('entity_id',$entity_id)
+                        ->get();
             $invoices_array = [];
             foreach($invoices as $inv){
-                $invoices_array[$inv->id]=$inv->title;
+                $invoices_array[$inv->id]=$inv->total_amount;
             }
-            return $invoices_array;
+            return json_encode($invoices_array);
         }
 
         public function exportInvoicesByDate(Request $request){
@@ -274,7 +275,7 @@ exit;
                     $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
                 }
 
-                $export_invoices[] = [$inv->created_at, $inv->owner_entity->name, $inv->title, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
+                $export_invoices[] = [$inv->created_at, $inv->owner_entity->name, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
             }
 
             $file_name = 'Invoices.xlsx';

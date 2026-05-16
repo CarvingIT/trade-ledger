@@ -41,21 +41,23 @@
     			<div class="mt-6 text-gray-900">
 
                 <form name="transaction_export" action="/admin/transactions" method="GET" id="downloadTransactions">
-                <div class="col-span-4">
+                <div class="col-span-4" style="float:left; padding-right:1%;">
                 <label class="block font-medium text-sm" for="datepicker">Start Date </label>
                 <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker" name="start_date" type="text" value="@if(!empty($_GET)){{ $_GET['start_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
                 </div>
-                <div class="col-span-4">
+                <div class="col-span-4" style="float:left;">
                 <label class="block font-medium text-sm" for="datepicker1">End Date </label>
                 <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker1" name="end_date" type="text" value="@if(!empty($_GET)){{ $_GET['end_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
                 </div>
             </form>
-            <br />
+<div class="clear">&nbsp;</div>
             @if(!empty($_GET) && !empty($_GET['start_date']) && !empty($_GET['end_date']))
-                <a class="m-5" title="Export Payments" href="/admin/export/transactions_by_date?start_date={{ $_GET['start_date'] }}&end_date={{  $_GET['end_date'] }}">Export Payments: <span class="fas fa-file-export"></span></a>
+                <a class="m-5" title="Export Payments" href="/admin/export/transactions_by_date?start_date={{ $_GET['start_date'] }}&end_date={{  $_GET['end_date'] }}"><span class="fas fa-file-export fa-2x"></span></a>
             @endif
 
 <div class="clear">&nbsp;</div>
+<div class="clear">&nbsp;</div>
+<br />
 
 			<div class="table-responsive">
                     <table id="transactions" class="display">
@@ -79,7 +81,7 @@
 			<td>{{ $c->type }}</td>
 			<td>{{ $c->entity->name }}</td>
 			<td>{{ $c->total_amount }}</td>
-			<td>{{ $c->status }}</td>
+			<td>{{ ucfirst($c->status) }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
 			<td>
 				<a href="/admin/transaction/{{ $c->id }}" title="View Details"><span class="fas fa-eye" style="padding:5%;"></span></a>

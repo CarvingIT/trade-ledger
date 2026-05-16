@@ -106,10 +106,10 @@ class TransactionController extends Controller
             $export_transactions = [];
             foreach($transactions as $trans){
 
-                $export_transactions[] = [$trans->created_at, $trans->invoice_id, $trans->entity->name, $trans->owner_entity->name, $trans->total_amount, $trans->account->name, $trans->status];
+                $export_transactions[] = [$trans->created_at, $trans->invoice_id, $trans->entity->name, $trans->owner_entity->name, $trans->total_amount, $trans->account->name, ucfirst($trans->status)];
             }
 
-            $file_name = 'Payments.xlsx';
+            $file_name = 'Payments_'.time().'.xlsx';
             return Excel::download(new PaymentTransactionExport($export_transactions), $file_name);
         }
 

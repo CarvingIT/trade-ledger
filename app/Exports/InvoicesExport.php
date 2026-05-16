@@ -27,7 +27,6 @@ class InvoicesExport implements FromArray, WithHeadings
         [
             'Created At',
             'Owner Entity',
-            'Title',
             'Client Entity',
             'Total Amount',
             'Total Amount Including Tax',

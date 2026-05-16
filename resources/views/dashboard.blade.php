@@ -32,7 +32,7 @@
 
             <div class="overflow-hidden sm:rounded-md">
                 <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
-                    <div class="grid grid-cols-6 gap-6">
+                    <div class="grid gap-6">
 
                     <form name="save-current-entity" action="/admin/save_current_entity" method="post">
                     @csrf

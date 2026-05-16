@@ -9,7 +9,7 @@
 <script type="text/javascript">
 function getInvoices(entity_id){
         var entity_id = entity_id;
-        //alert(entity_id);
+        alert(entity_id);
        $.ajax({ 
                     url: '/admin/get_invoices/ajax/'+entity_id,
                     type: "GET",
@@ -129,7 +129,7 @@ $("#line_items").DataTable(
         <!-- Type -->
         <div class="col-span-8 md:col-span-4">
              <label class="block font-medium text-sm" for="type">Type<span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="type" name="type" type="text" value="{{ $transaction->type }}" required>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="type" name="type" type="text" value="{{ $transaction->type }}" placeholder="Online,Cash" required>
         </div>
         
         <!-- Client's Entity/Company -->
@@ -138,7 +138,6 @@ $("#line_items").DataTable(
              <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" onChange="getInvoices(this.value);" required>
             <option value="">Select Entity</option>
         @foreach($entities as $c)
-                @php /*if(auth()->user()->get_current_entity($c->id) == 1) continue; */ @endphp
         <option value="{{ $c->id }}" @if($c->id == $transaction->entity_id) selected @endif>{{ $c->name }}</option>
         @endforeach
         </select>
@@ -146,14 +145,10 @@ $("#line_items").DataTable(
 
         <!-- Client's Invoices -->
         <div class="col-span-4">
-             <label class="block font-medium text-sm" for="entity_id">Invoices<span style="color:#F1541E;">*</span></label><p>Client Invoices wouldbe listed here</p>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_id" name="invoice_id" onChange="getTotalAmount(this.value);" required>
-            <!--option value="">Choose Invoice</option-->
-        @foreach($invoices as $c)
-        <option value="{{ $c->id }}" @if($c->id == $transaction->invoice_id) selected @endif>{{ $c->title }}</option>
-        @endforeach
-        </select>
+             <label class="block font-medium text-sm" for="entity_id">Invoice ID<span style="color:#F1541E;">*</span></label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="total_amount" name="total_amount" type="text" value="{{ $transaction->invoice_id }}" required>
         </div>
+
         <!-- Total Amount -->
         <div class="col-span-4 md:col-span-2">
              <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount (including tax if applicable) <span style="color:#F1541E;">*</span></label>
