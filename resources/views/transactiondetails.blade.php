@@ -52,7 +52,7 @@ $("#line_items").DataTable(
         <!-- Accounts -->
         <div class="col-span-4">
              <label class="block font-medium text-sm" for="entity_id">Accounts<span style="color:#F1541E;">*</span></label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="account_id" name="account_id" disabled>
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="account_id" name="account_id" disabled style="background:#eee;">
             <option value="">Select Account</option>
         @foreach($accounts as $c)
         <option value="{{ $c->id }}" @if($c->id == $transaction->account_id) selected @endif>{{ $c->name }}</option>
@@ -63,13 +63,13 @@ $("#line_items").DataTable(
         <!-- Type -->
         <div class="col-span-8 md:col-span-4">
              <label class="block font-medium text-sm" for="type">Type<span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="type" name="type" type="text" value="{{ $transaction->type }}" readonly>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="type" name="type" type="text" value="{{ $transaction->type }}" readonly style="background:#eee;">
         </div>
         
         <!-- Client's Entity/Company -->
         <div class="col-span-4">
              <label class="block font-medium text-sm" for="entity_id">Client Entity<span style="color:#F1541E;">*</span></label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" onChange="getInvoices(this.value);" disabled>
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" onChange="getInvoices(this.value);" disabled style="background:#eee;">
             <option value="">Select Entity</option>
         @foreach($entities as $c)
         <option value="{{ $c->id }}" @if($c->id == $transaction->entity_id) selected @endif>{{ $c->name }}</option>
@@ -79,22 +79,17 @@ $("#line_items").DataTable(
 
         <!-- Client's Invoices -->
         <div class="col-span-4">
-             <label class="block font-medium text-sm" for="entity_id">Invoices<span style="color:#F1541E;">*</span></label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_id" name="invoice_id" onChange="getTotalAmount(this.value);" disabled>
-            <option value="">Choose Invoice</option>
-        @foreach($invoices as $c)
-        <option value="{{ $c->id }}" @if($c->id == $transaction->invoice_id) selected @endif>{{ $c->title }}</option>
-        @endforeach
-        </select>
+             <label class="block font-medium text-sm" for="entity_id">Invoice ID<span style="color:#F1541E;">*</span></label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_id" name="invoice_id" type="text" value="{{ $transaction->invoice_id }}" onChange="getTotalAmount(this.value);" readonly style="background:#eee;">
         </div>
 
         <!-- Total Amount -->
         <div class="col-span-8 md:col-span-2">
              <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="total_amount" name="total_amount" type="text" value="{{ $transaction->total_amount }}" readonly>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="total_amount" name="total_amount" type="text" value="{{ $transaction->total_amount }}" readonly style="background:#eee;">
             <div id="toggle_tax" style="display:none">
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="tax_name" name="tax_name" type="text" value="" readonly>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="tax_value" name="tax_value" type="text" value="" readonly>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="tax_name" name="tax_name" type="text" value="" readonly style="background:#eee;">
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="tax_value" name="tax_value" type="text" value="" readonly style="background:#eee;">
             </div>
         </div>
 
@@ -108,7 +103,7 @@ $("#line_items").DataTable(
         <!-- Description -->
         <div class="col-span-8">
              <label class="block font-medium text-sm" for="description">Description</label>
-             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text">{{ $transaction->description }}</textarea>
+             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text" style="background:#eee;">{{ $transaction->description }}</textarea>
         </div>
         
        </div>

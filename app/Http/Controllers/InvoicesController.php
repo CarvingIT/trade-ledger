@@ -275,7 +275,7 @@ exit;
                     $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
                 }
 
-                $export_invoices[] = [$inv->created_at, $inv->owner_entity->name, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
+                $export_invoices[] = [$inv->id, $inv->created_at, $inv->owner_entity->name, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
             }
 
             $file_name = 'Invoices_'.time().'.xlsx';

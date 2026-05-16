@@ -62,7 +62,7 @@
                     <table id="invoices" class="display">
                         <thead class="text-primary">
                             <tr>
-                            <!--th>Title</th-->
+                            <th>Invoice ID</th>
 			                <th>Owner Entity</th>
 			                <th>Entity (Client)</th>
 			                <th>Description</th>
@@ -75,7 +75,7 @@
                         <tbody>
 			@foreach ($invoices as $c)
         		<tr>
-			<!--td>{{ $c->title }}</td-->
+			<td>{{ $c->id }}</td>
 			<td>{{ $c->owner_entity->name }}</td>
 			<td>{{ $c->entity->name }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>

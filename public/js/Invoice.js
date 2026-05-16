@@ -9,13 +9,15 @@ $(document).ready(function() {
         stateSave:true,
         "scrollX": true,
         columnDefs: [
-                        { width: '20%', targets: 0 },
-                        { width: '10%', targets: 1 },
+                        { width: '5%', targets: 0 },
+                        { width: '15%', targets: 1 },
                         { width: '15%', targets: 2 },
-                        { width: '13%', targets: 3 },
-                        { width: '13%', targets: 4 },
-                        { width: '13%', targets: 5 },
-                        { "orderable": false, targets: 5 }
+                        { width: '10%', targets: 3 },
+                        { width: '10%', targets: 4 },
+                        { width: '10%', targets: 5 },
+                        { width: '10%', targets: 6 },
+                        { width: '10%', targets: 7 },
+                        { "orderable": false, targets: 7 }
                 ],
                 "lengthMenu": [ 100, 500, 1000 ],
                 "pageLength": 100,

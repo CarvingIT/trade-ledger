@@ -25,6 +25,7 @@ class InvoicesExport implements FromArray, WithHeadings
     public function headings(): array{
         return
         [
+            'Invoice ID',
             'Created At',
             'Owner Entity',
             'Client Entity',

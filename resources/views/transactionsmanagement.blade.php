@@ -67,6 +67,7 @@
                             <th>Account</th>
                             <th>Type</th>
 			                <th>Entity (Client)</th>
+			                <th>Invoice ID</th>
 			                <th>Total Amount</th>
 			                <th>Status</th>
 			                <th>Description</th>
@@ -80,6 +81,7 @@
 			<td>{{ $c->account->name }}</td>
 			<td>{{ $c->type }}</td>
 			<td>{{ $c->entity->name }}</td>
+			<td>{{ $c->invoice_id }}</td>
 			<td>{{ $c->total_amount }}</td>
 			<td>{{ ucfirst($c->status) }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>

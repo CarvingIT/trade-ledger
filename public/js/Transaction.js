@@ -14,11 +14,12 @@ $(document).ready(function() {
                         { width: '13%', targets: 1 },
                         { width: '10%', targets: 2 },
                         { width: '13%', targets: 3 },
-                        { width: '13%', targets: 4 },
+                        { width: '10%', targets: 4 },
                         { width: '10%', targets: 5 },
-                        { width: '14%', targets: 6 },
+                        { width: '10%', targets: 6 },
                         { width: '10%', targets: 7 },
-                        { "orderable": false, targets: 7 }
+                        { width: '10%', targets: 8 },
+                        { "orderable": false, targets: 8 }
                 ],
                 "lengthMenu": [ 100, 500, 1000 ],
                 "pageLength": 100,
