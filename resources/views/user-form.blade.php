@@ -57,7 +57,8 @@
             <input type="hidden" name="select_option" value="">
             @endif
              <label class="block font-medium text-sm" for="entity_id">Entities</label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id[]" multiple onChange="this.form.submit();">
+             <!--select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id[]" multiple onChange="this.form.submit();"-->
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id[]" multiple>
 		@foreach($entities as $c)
 		<option value="{{ $c->id }}" @if(in_array($c->id,$owner_entities_array)) selected @endif>{{ $c->name }}</option>
 		@endforeach

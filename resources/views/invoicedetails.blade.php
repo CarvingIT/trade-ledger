@@ -43,11 +43,13 @@
 <div class="overflow-hidden sm:rounded-md">
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
        <div class="grid grid-cols-6 gap-6">
-        <!-- Company Name -->
+        <!-- Title -->
+        <!--
         <div class="col-span-8">
              <label class="block font-medium text-sm" for="invoice">Title <span style="color:#F1541E;">*</span></label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="title" name="title" type="text" value="{{ $invoice->title }}" required readonly style="background:#eee;">
         </div>
+        -->
 
         <!-- Owner Entity -->
         <div class="col-span-4" md:col-span-4">
@@ -113,6 +115,10 @@
             </table>
          </div>
        </div>
+        <button type="button" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 m-1" wire:loading.attr="disabled" onclick="window.history.back();">
+    Back
+     </button>
+
 
                      </div>
                 </div>

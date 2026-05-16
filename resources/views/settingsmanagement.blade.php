@@ -31,9 +31,9 @@
 
 	        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
 			<div class="text-right">
-				@if(Auth::user()->hasRole('admin'))
-                <a class="m-5" title="New Product" href="/admin/setting-form/new"><span class="fas fa-plus"></span></a>
-                @endif
+				{{--@if(Auth::user()->hasRole('admin'))--}}
+                <a class="m-5" title="New Setting" href="/admin/setting-form/new"><span class="fas fa-plus"></span></a>
+                {{--@endif--}}
                 &nbsp;
 				<!--a class="m-5" title="Export" href="/admin/export/settings"><span class="fas fa-file-export"></span></a-->
 			</div>
@@ -59,7 +59,7 @@
 			<td>
 				<a href="/admin/setting/{{ $c->id }}" title="View Details"><span class="fas fa-eye" style="padding:5%;"></span></a>
 				@if(Auth::user()->hasRole('admin'))
-				<a href="/admin/setting-form/{{ $c->id }}" title="Edit"><span class="fas fa-pencil-alt" style="padding:5%;"></span></a>
+				<!--a href="/admin/setting-form/{{ $c->id }}" title="Edit"><span class="fas fa-pencil-alt" style="padding:5%;"></span></a-->
 				<button id="opener" class="delete_setting" data-setting-id="{{ $c->id }}" title="Delete"><span class="fas fa-trash-alt"></span></button>
 				@endif
 

@@ -29,7 +29,7 @@
 	        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
 			<div class="text-right">
 				@if(Auth::user()->hasRole('admin'))
-                                <a title="Edit entity" href="/admin/setting-form/{{$setting->id}}"><span class="fas fa-pencil-alt m-1 fa-2x"></span></a>
+                                <!--a title="Edit entity" href="/admin/setting-form/{{$setting->id}}"><span class="fas fa-pencil-alt m-1 fa-2x"></span></a-->
                                 @endif
                         </div>
 
@@ -41,6 +41,12 @@
 <div class="overflow-hidden sm:rounded-md">
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
        <div class="grid grid-cols-6 gap-6">
+        <!-- Settings Owner Entity -->
+        <div class="col-span-8 md:col-span-4">
+             <label class="block font-medium text-sm" for="name">Owner Entity</label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="owner_entity" name="owner_entity" type="text" value="{{ $setting->owner_entity->name }}" readonly style="background:#eee;">
+        </div>
+
         <!-- Name -->
         <div class="col-span-8">
              <label class="block font-medium text-sm" for="setting">Name of the setting <span style="color:#F1541E;">*</span></label>
@@ -63,6 +69,9 @@
     </div>
                             </div>
 				</form>
+    <button type="button" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 m-1" wire:loading.attr="disabled" onclick="window.history.back();">
+    Back
+     </button>
                         </div>
                 </div>
             </div>

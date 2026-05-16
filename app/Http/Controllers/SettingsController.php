@@ -45,7 +45,7 @@ class SettingsController extends Controller
             Session::flash('alert-success', 'Setting saved successfully!');
          }
          catch(\Exception $e){
-            Session::flash('alert-danger', "Error has orrcured: Please check. ".$e->getMessage());
+            Session::flash('alert-danger', "Please check again. Your current organization which is the Owner Entity in this table has already set the ".$request->input('name'));
          }
         return redirect('/admin/settings');
     }

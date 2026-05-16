@@ -33,7 +33,6 @@ class UserController extends Controller
     public function save(Request $request){
         if(empty($request->input('user_id'))){
            $u = new User;
-           $new_user = 1;
         }
         else{
            $u = User::find($request->input('user_id'));
@@ -48,34 +47,17 @@ class UserController extends Controller
                 $u->email_verified_at = time();
             }
         }
+        $referer = '/admin/users';
         try{
         $u->save();
-        $referer = 'admin/user-form/'.$u->id;
-        //Below code shifted to dashboard
+
         if(!empty($request->entity_id)){
+            $owner_entities = OwnerEntity::where('user_id',$u->id)
+                                ->delete();
             foreach($request->entity_id as $entity_id){
-                $owner_entity = OwnerEntity::where('user_id', $request->input('user_id'))
-                                ->where('entity_id',$entity_id)
-                                ->first();
-                if(empty($owner_entity->id)){
                 $entity = new OwnerEntity();
-                }
-                else{
-                $entity = OwnerEntity::where('user_id', $request->input('user_id'))
-                                ->where('entity_id',$entity_id)
-                                ->first();
-                }
-                $entity->user_id = $request->input('user_id');
+                $entity->user_id = $u->id;
                 $entity->entity_id = $entity_id;
-        /*
-                if($request->primary_entity == $entity_id){
-                $entity->primary_entity = 1;
-                $referer = '/admin/users';
-                }
-                else{
-                $entity->primary_entity = 0;
-                }
-        */
                 $entity->save();
             }
         }
@@ -84,7 +66,7 @@ class UserController extends Controller
         catch(\Exception $e){
         Session::flash('alert-danger','There is some error please try again'.$e->getMessage());
         }
-        return redirect($referer);
+        return redirect('/admin/users');
     }    
 
     public function deleteUser(Request $request){
