@@ -74,6 +74,10 @@ exit;
          $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')                       //Primary meaning Current entity.
                         ->first();
+        if(empty($owner_entity->id)){
+            Session::flash('alert-danger', "Invoice creation failed. Please check your current business is chosen on the dashboard. Then create the invoice.");
+            return redirect('/admin/invoices');
+        }
          //Here these lines are necessary
          $tax_details = Setting::where('owner_entity_id', $owner_entity->entity_id)
                         ->where('name','GST')
