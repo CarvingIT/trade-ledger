@@ -47,11 +47,15 @@ class InvoicesController extends Controller
     public function save(Request $request){
 /*
 print_r($request->product_id);
-$product_items = $request->product_id;
+echo "<br />";
+print_r($request->rate);
+echo "<br />";
 print_r($request->quantity);
+$product_items = $request->product_id;
+$product_rates = $request->rate;
 echo "<br />";
 foreach($request->quantity as $prod=>$qty){
-    echo $product_items[$prod]." ".$qty."<br />";
+    echo $product_items[$prod]." Rate: ".$product_rates[$prod]." ".$qty."<br />";
     $product_id = $product_items[$prod];
                     $product = Product::find($product_id);
                     echo "Name: ".$product->name."<br/>";
@@ -103,18 +107,22 @@ exit;
             }
 
          $product_items = $request->product_id;
+         $product_rates = $request->rate;
          if(!empty($request->product_id) && !empty($request->quantity)){
                 foreach($request->quantity as $prod=>$qty){
                     $line_item = new LineItem();
+
                     $product_id = $product_items[$prod];
+                    $prod_rate = $product_rates[$prod]; //Rate dynamically set in the Invoice form
+
                     $product = Product::find($product_id);
                     $line_item->product_id = $product_id;
                     $line_item->invoice_id = $c->id;
                     $line_item->item_name = $product->name;
                     $line_item->quantity = $qty;
-                    $line_item->rate = $product->price;
-                    $line_item->amount = $product->price*$qty;
-                    $total_amount += $product->price*$qty;
+                    $line_item->rate = $prod_rate;
+                    $line_item->amount = $prod_rate*$qty;
+                    $total_amount += $prod_rate*$qty;
                     $line_item->save();
                 }
          }     

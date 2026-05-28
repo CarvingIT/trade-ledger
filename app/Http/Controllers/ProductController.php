@@ -80,5 +80,11 @@ class ProductController extends Controller
         return $products_array;
     }
 
+     public function getProductRate($product_id){
+        $product_details = Product::find($product_id);
+        return json_encode(['rate'=>$product_details->price]);
+    }
+
+
 // End of the Class
 }

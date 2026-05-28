@@ -61,20 +61,42 @@ class LineItemController extends Controller
 
     public function deleteLineItem(Request $request){
         $lineitem = LineItem::find($request->lineitem_id);
-        $invoice_id = $lineitem->invoice_id;
-        $invoice = Invoice::find($invoice_id);
+        if(!empty($lineitem->invoice_id)){
+            $invoice_id = $lineitem->invoice_id;
+        }
+        else if(!empty($lineitem->purchase_id)){
+            $purchase_id = $lineitem->purchase_id;
+        }
         $total_amount = 0;
         if(!empty($lineitem->id)){
             $lineitem->delete();
-            $invoice_line_items = LineItem::where('invoice_id',$invoice_id)->get(); 
-            foreach($invoice_line_items as $item){
-                $total_amount += $item->amount; 
+            if(!empty($invoice_id)){
+                $invoice = Invoice::find($invoice_id);
+                $invoice_line_items = LineItem::where('invoice_id',$invoice_id)->get(); 
+                foreach($invoice_line_items as $item){
+                    $total_amount += $item->amount; 
+                }
+                $invoice->total_amount = $total_amount;
+                $invoice->save();
+            }    
+            else if(!empty($purchase_id)){
+                $purchase = Purchase::find($purchase_id);
+                $purchase_line_items = LineItem::where('purchase_id',$purchase_id)->get(); 
+                $p_total_amount = 0;
+                foreach($purchase_line_items as $item){
+                    $p_total_amount += $item->amount; 
+                }
+                $purchase->total_amount = $p_total_amount;
+                $purchase->save();
             }
-            $invoice->total_amount = $total_amount;
-            $invoice->save();
             Session::flash('alert-success', 'Line item deleted successfully!');
         }
-        return redirect('/admin/invoice-form/'.$invoice_id);
+            if(!empty($invoice_id)){
+                return redirect('/admin/invoice-form/'.$invoice_id);
+            }    
+            else if(!empty($purchase_id)){
+                return redirect('/admin/purchase-form/'.$purchase_id);
+            }
     }
 
 // End of the Class

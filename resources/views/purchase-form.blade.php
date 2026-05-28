@@ -5,6 +5,7 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/jquery-ui.js"></script>
+<script src="/js/Purchase.js"></script>
 
 <script type="text/javascript">
 var count=0;
@@ -29,7 +30,7 @@ for(i = 1; i <= 1000; i++) {
     quantity += '<option value="'+i+'">'+i+'</option>';
 }
 
-$( sopra ).append( '<hr /><br /><span style="color:#F1541E;">Please choose products and quantity you purchased</span><div id="first'+count+'"><div class="px-4 py-5 bg-white sm:p-6 text-gray-900"><div class="grid grid-cols-6 gap-6"><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="product">Products</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="product_id'+count+'" name="product_id[]"></select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="qty">Qty</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="quantity'+count+'" name="quantity[]"><option value="">Select Qty</option>'+quantity+'</select></div></div></div></div>');
+$( sopra ).append( '<hr /><br /><span style="color:#F1541E;">Please choose a product and a quantity you purchased. The amount will be displayed only after choosing the product and the quantity.</span><div id="first'+count+'"><div class="px-4 py-5 bg-white sm:p-6 text-gray-900"><div class="grid grid-cols-6 gap-6"><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="product">Products</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" onChange="getRate(this.value);" id="product_id'+count+'" name="product_id[]"><option value="">Choose Product</option></select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="rate">Rate</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="rate[]" id="rate'+count+'" value="" onChange="calculateAmount();"></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="qty">Qty</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="quantity'+count+'" name="quantity[]" onChange="calculateAmount();"><option value="">Select Qty</option>'+quantity+'</select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="amount">Amount</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="amount[]" id="amount'+count+'" value=""></div></div></div></div>');
 count++;
 }
 
@@ -52,6 +53,34 @@ $("#line_items").DataTable(
     }
         }
     );
+
+function calculateAmount(){
+        var cnt = count-1;
+        //alert(cnt);
+        var quantity = document.getElementById('quantity'+cnt).value;
+        var rate = document.getElementById('rate'+cnt).value;
+        var amount = quantity * rate;
+        document.getElementById('amount'+cnt).value = amount;
+    }
+
+ function getRate(product_id){
+        var product_id = product_id;
+        //alert(count);
+        var cnt = count-1;
+        //alert(cnt);
+        //alert(product_id);
+        $.ajax({
+                    url: '/admin/get_product_rate/ajax/'+product_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        //alert(data.rate);
+                        $('#rate'+cnt).val(data.rate);
+                        calculateAmount();
+                    }
+              });
+    }
+
 
 </script>
 
@@ -149,6 +178,7 @@ $("#line_items").DataTable(
 {{--@endif--}}
                             </div>
 				</form>
+</div>
         <div class="clear">&nbsp</div>
         <div class="col-span-8 md:col-span-2">
                 @foreach($line_items as $line_item)

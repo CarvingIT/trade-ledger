@@ -32,6 +32,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/product/delete','\App\Http\Controllers\ProductController@deleteProduct');
         Route::get('/product/{product_id}','\App\Http\Controllers\ProductController@viewProduct');
         Route::get('/get_products/ajax','\App\Http\Controllers\ProductController@getProducts');
+        Route::get('/get_product_rate/ajax/{product_id}','\App\Http\Controllers\ProductController@getProductRate');
 
         //Settings
         Route::get('/settings','\App\Http\Controllers\SettingsController@index')->name('settings');

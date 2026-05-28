@@ -115,6 +115,16 @@ $(document).ready(function(){
     $(".admin-dropdown").click(function(){
         $("#admin-dropdown-content").toggle();
     });
+
+    $(".delete_lineitem").click(function(){
+        const lineitem_id = $(this).data('lineitem-id');
+        //alert(lineitem_id);
+        $('#delete_lineitem_id').val(lineitem_id);
+        $("#deletedialog").dialog({
+            title:'Are you sure?',
+            dialogClass: "alert"
+        });
+    });
 });
 
 /*
