@@ -75,11 +75,11 @@ exit;
          $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')                       //Primary meaning Current entity.
                         ->first();
-         $vendor_entity = OwnerEntity::where('entity_id', $request->input('entity_id'))
-                        ->where('primary_entity','1')                       //Primary meaning Current entity.
-                        ->first();
+         //$vendor_entity = OwnerEntity::where('entity_id', $request->input('entity_id'))
+                        //->where('primary_entity','1')                       //Primary meaning Current entity.
+          //              ->first();
          //Here these lines are necessary
-         $tax_details = Setting::where('owner_entity_id', $vendor_entity->entity_id)
+         $tax_details = Setting::where('owner_entity_id', $request->input('entity_id'))
                         ->where('name','GST')
                         ->first();
          if(!empty($tax_details->value)){
