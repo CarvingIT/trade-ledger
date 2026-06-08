@@ -30,7 +30,16 @@ for(i = 1; i <= 1000; i++) {
     quantity += '<option value="'+i+'">'+i+'</option>';
 }
 
+const mobileQuery = window.matchMedia("(max-width: 768px)");
+//alert(mobileQuery.matches);
+if (mobileQuery.matches) {
+//Mobile view so all the input fields display in two rows.
+$( sopra ).append( '<hr /><br /><span style="color:#F1541E;">Please choose a product and a quantity you purchased. The amount will be displayed only after choosing the product and the quantity.</span><div id="first'+count+'"><div class="px-4 py-5 bg-white sm:p-6 text-gray-900"><div class="grid grid-cols-3 gap-3"><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="product">Products</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" onChange="getRate(this.value);" id="product_id'+count+'" name="product_id[]"><option value="">Choose Product</option></select></div><div class="col-span-1 md:col-span-1"><label class="block font-medium text-sm" for="rate">Rate</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="rate[]" id="rate'+count+'" value="" onChange="calculateAmount();"></div><div class="col-span-1 md:col-span-1"><label class="block font-medium text-sm" for="qty">Qty</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="quantity'+count+'" name="quantity[]" onChange="calculateAmount();"><option value="">Select Qty</option>'+quantity+'</select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="amount">Amount</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="amount[]" id="amount'+count+'" value=""></div></div></div></div>');
+}
+else{
+//Desktop view so all fields display in one row.
 $( sopra ).append( '<hr /><br /><span style="color:#F1541E;">Please choose a product and a quantity you purchased. The amount will be displayed only after choosing the product and the quantity.</span><div id="first'+count+'"><div class="px-4 py-5 bg-white sm:p-6 text-gray-900"><div class="grid grid-cols-6 gap-6"><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="product">Products</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" onChange="getRate(this.value);" id="product_id'+count+'" name="product_id[]"><option value="">Choose Product</option></select></div><div class="col-span-1 md:col-span-1"><label class="block font-medium text-sm" for="rate">Rate</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="rate[]" id="rate'+count+'" value="" onChange="calculateAmount();"></div><div class="col-span-1 md:col-span-1"><label class="block font-medium text-sm" for="qty">Qty</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="quantity'+count+'" name="quantity[]" onChange="calculateAmount();"><option value="">Select Qty</option>'+quantity+'</select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="amount">Amount</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="amount[]" id="amount'+count+'" value=""></div></div></div></div>');
+}
 count++;
 }
 
