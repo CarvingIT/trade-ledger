@@ -141,7 +141,7 @@ function calculateAmount(){
              <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text">{{ $invoice->description }}</textarea>
         </div>
         -->
-        
+       <div class="clear">&nbsp;</div> 
         <!-- Total Amount -->
         <div class="col-span-8 md:col-span-2">
             @if(!empty($invoice->entity_id))
@@ -155,7 +155,7 @@ function calculateAmount(){
                 @endphp
             @endif
             @if(!empty($invoice->total_amount))
-             <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount (in Rs.): {{ $invoice->total_amount }} @if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)) <br />{{ $invoice->tax_name }}: {{ $invoice->tax_value }}<br /> Total Amount including tax (in Rs.): {{ $total_amount_including_tax }} @endif
+             <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount (in Rs.): {{ number_format($invoice->total_amount,2) }} @if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)) <br />{{ $invoice->tax_name }}: {{ $invoice->tax_value }}<br /> Total Amount including tax (in Rs.): {{ number_format($total_amount_including_tax,2) }} @endif
 </label>
             @endif
         </div>

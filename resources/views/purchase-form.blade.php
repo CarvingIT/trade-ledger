@@ -150,7 +150,7 @@ function calculateAmount(){
                 @endphp
             @endif
             @if(!empty($purchase->total_amount))
-             <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount (in Rs.): {{ $purchase->total_amount }} @if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)) <br />{{ $purchase->tax_name }}: {{ $purchase->tax_value }}<br /> Total Amount including tax (in Rs.): {{ $total_amount_including_tax }} @endif
+             <label class="block font-medium text-sm" for="total_amount" style="color:red; font-size:15px;">Total Amount (in Rs.): {{ number_format($purchase->total_amount,2) }} @if(!empty($owner_entity_details->GSTIN_number) && !empty($tax_number)) <br />{{ $purchase->tax_name }}: {{ $purchase->tax_value }}<br /> Total Amount including tax (in Rs.): {{ number_format($total_amount_including_tax,2) }} @endif
 </label>
             @endif
         </div>
