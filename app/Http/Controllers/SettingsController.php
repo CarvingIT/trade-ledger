@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\OwnerEntity;
+use App\Models\Entity;
 use Session;
 
 class SettingsController extends Controller

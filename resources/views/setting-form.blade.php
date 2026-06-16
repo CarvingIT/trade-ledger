@@ -36,23 +36,19 @@ $( function() {
 				<input type="hidden" name="setting_id" value="{{ $setting->id }}" />	
 				@csrf	
 <div class="overflow-hidden sm:rounded-md">
+        <p style="color:red">The settings would be added for the entity which is currently chosen on the 'Dashboard'.</p>
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
        <div class="grid grid-cols-6 gap-6">
-        <!-- Settings Owner Entity -->
-        <div class="col-span-8 md:col-span-4">
-             <label class="block font-medium text-sm" for="name">Owner Entity</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="owner_entity" name="owner_entity" type="text" value="{{ $setting->owner_entity->name }}" required>
-        </div>
         <!-- Settings Name -->
         <div class="col-span-8 md:col-span-4">
              <label class="block font-medium text-sm" for="name">Name of the setting <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" value="{{ $setting->name }}" required>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" value="{{ $setting->name }}" placeholder="e.g. GST" required>
         </div>
 	
         <!-- Price -->
         <div class="col-span-4" md:col-span-4">
              <label class="block font-medium text-sm" for="value">Value <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="value" name="value" type="text" value="{{ $setting->value }}" required>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="value" name="value" type="text" value="{{ $setting->value }}" placeholder="e.g. 18%" required>
         </div>
 
         <!-- Description -->
