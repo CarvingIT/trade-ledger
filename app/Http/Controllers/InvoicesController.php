@@ -71,9 +71,11 @@ exit;
          else{
             $c = Invoice::find($request->input('invoice_id'));
          }
+
          $c->title = $request->input('title');
          $c->description = $request->input('description');
          $c->entity_id = $request->input('entity_id');                       //Client entity id
+         $c->invoice_date = $request->input('invoice_date');
          $user_id = auth()->user()->id;
          $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')                       //Primary meaning Current entity.
@@ -264,10 +266,15 @@ exit;
         public function exportInvoicesByDate(Request $request){
             $start_date = $request->start_date;
             $end_date = $request->end_date; 
-            $start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
-            $end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
 
-            $invoices = Invoice::whereBetween('created_at', [$start_date, $end_date])
+            //$start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
+            //$end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
+            $start_date = date('Y-m-d', strtotime($request->input('start_date')));
+            $end_date = date('Y-m-d', strtotime($request->input('end_date')));
+
+            #$invoices = Invoice::whereBetween('created_at', [$start_date, $end_date])
+            #            ->get();
+            $invoices = Invoice::whereBetween('invoice_date', [$start_date, $end_date])
                         ->get();
 
             $export_invoices = [];

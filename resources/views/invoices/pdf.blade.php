@@ -27,7 +27,7 @@
     <div class="invoice-box">
         <h1>Invoice #{{ $invoice->id }}</h1>
         <p><b>Customer</b>: {{ $invoice->entity->name }}</p>
-        <p><b>Date:</b> {{ $invoice->created_at->format('d/m/Y') }}</p>
+        <p><b>Date:</b> {{ date('d/m/Y', strtotime($invoice->invoice_date)) }}</p>
         <p><b>Description</b>: {{ $invoice->description }}</p>
 
         <table border="1" cellspacing="0" cellpadding="5">
@@ -40,13 +40,15 @@
                 </tr>
             </thead>
             <tbody>
+                @php $i=1; @endphp
                 @foreach($line_items as $line_item)
                 <tr>
-                    <td class="item-name">{{ $line_item->item_name }}</td>
+                    <td class="item-name">{{ $i }}. {{ $line_item->item_name }}</td>
                     <td class="item">Rs. {{ $line_item->rate }} / {{ $line_item->product->unit_detail->name }}</td>
                     <td class="item">{{ $line_item->quantity }}</td>
                     <td class="item">{{ $line_item->amount }}</td>
                 </tr>
+                @php $i++; @endphp
                 @endforeach
                 <tr>
                     <th class="text-right">Total Amount</th>

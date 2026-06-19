@@ -42,12 +42,12 @@
 
             <form name="invoices_export" action="/admin/invoices" method="GET" id="downloadInvoices">
                 <div class="col-span-4" style="float:left; padding-right:1%;">
-                <label class="block font-medium text-sm" for="datepicker">Start Date </label>
-                <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker" name="start_date" type="text" value="@if(!empty($_GET)){{ $_GET['start_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
+                <label class="block font-medium text-sm" for="datepicker">Invoice Start Date </label>
+                <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker" name="start_date" type="date" value="@if(!empty($_GET)){{ $_GET['start_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
                 </div>
                 <div class="col-span-4" style="float:left;">
-                <label class="block font-medium text-sm" for="datepicker1">End Date </label>
-                <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker1" name="end_date" type="text" value="@if(!empty($_GET)){{ $_GET['end_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
+                <label class="block font-medium text-sm" for="datepicker1">Invoice End Date </label>
+                <input class="form-input rounded-md shadow-sm mt-1 block" id="datepicker1" name="end_date" type="date" value="@if(!empty($_GET)){{ $_GET['end_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
                 </div>
             </form>
             <div class="clear">&nbsp;</div>
@@ -65,8 +65,8 @@
                             <th>Invoice ID</th>
 			                <th>Owner Entity</th>
 			                <th>Entity (Client)</th>
-			                <th>Description</th>
 			                <th>Total Amount</th>
+			                <th>Invoice Date</th>
 			                <th>Created at</th>
 			                <th>Updated at</th>
                             <th class="text-right">Actions</th>
@@ -78,10 +78,10 @@
 			<td>{{ $c->id }}</td>
 			<td>{{ $c->owner_entity->name }}</td>
 			<td>{{ $c->entity->name }}</td>
-			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
 			<td>{{ $c->total_amount }}</td>
-			<td>{{ $c->created_at }}</td>
-			<td>{{ $c->updated_at }}</td>
+			<td>{{ $c->invoice_date }}</td>
+			<td>{{ date('Y-m-d', strtotime($c->created_at)) }}</td>
+			<td>{{ date('Y-m-d', strtotime($c->updated_at)) }}</td>
 			<td>
 				<a href="/admin/invoice/{{ $c->id }}" title="View Details"><span class="fas fa-eye" style="padding:5%;"></span></a>
 				{{--@if(Auth::user()->hasRole('admin'))--}}

@@ -125,15 +125,23 @@ function calculateAmount(){
              @endforeach
         <div class="clear">&nbsp;</div>
        <div class="grid grid-cols-6 gap-6">
-        <!-- Title -->
-        <!--
-        <div class="col-span-8 md:col-span-4">
-             <label class="block font-medium text-sm" for="title">Title<span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="title" name="title" type="text" value="{{ $invoice->title }}" required>
+        <!-- Invoice Date -->
+        <div class="col-span-4 md:col-span-4">
+            @php
+$month = date('m');
+$day = date('d');
+$year = date('Y');
+$today = $year.'-'.$month.'-'.$day;
+            @endphp
+             <label class="block font-medium text-sm" for="invoice_date">Invoice Date<span style="color:#F1541E;">*</span></label>
+            @if(!preg_match('/new/',url()->current()))
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_date" name="invoice_date" type="date" value="{{ $invoice->invoice_date }}" required>
+            @else
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_date" name="invoice_date" type="date" value="{{ $today }}" required>
+            @endif
         </div>
-        -->
         <!-- Client's Company -->
-        <div class="col-span-4">
+        <div class="col-span-4 md:col-span-4">
              <label class="block font-medium text-sm" for="entity_id">Client Entity<span style="color:#F1541E;">*</span></label>
              <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" required>
         @foreach($entities as $c)

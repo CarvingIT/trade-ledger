@@ -43,34 +43,34 @@
 <div class="overflow-hidden sm:rounded-md">
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
        <div class="grid grid-cols-6 gap-6">
-        <!-- Title -->
-        <!--
-        <div class="col-span-8">
-             <label class="block font-medium text-sm" for="invoice">Title <span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="title" name="title" type="text" value="{{ $invoice->title }}" required readonly style="background:#eee;">
+
+        <!-- Invoice Date -->
+        <div class="col-span-4 md:col-span-4">
+             <label class="block font-medium text-sm" for="invoice">Invoice Date <span style="color:#F1541E;">*</span></label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_date" name="invoice_date" type="date" value="{{ $invoice->invoice_date }}" required readonly style="background:#eee;">
         </div>
-        -->
 
         <!-- Owner Entity -->
-        <div class="col-span-4" md:col-span-4">
+        <div class="col-span-4 md:col-span-4">
              <label class="block font-medium text-sm" for="owner entity">Owner Entity</label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="owner_entity" name="owner_entity" type="text" value="{{ $invoice->owner_entity->name }}"  readonly style="background:#eee;">
         </div>
 
         <!-- Client Entity -->
-        <div class="col-span-4" md:col-span-4">
+        <div class="col-span-4 md:col-span-4">
              <label class="block font-medium text-sm" for="client_entity">Client Entity</label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="client_entity" name="client_entity" type="text" value="{{ $invoice->entity->name }}"  readonly style="background:#eee;">
         </div>
 
+
         <!-- Price -->
-        <div class="col-span-8 md:col-span-2">
+        <div class="col-span-4 md:col-span-2">
              <label class="block font-medium text-sm" for="total_amount">Total Amount of Items (in Rs.)</label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="total_amount" name="total_amount" type="text" value="{{ $invoice->total_amount }}"  readonly style="background:#eee;">
         </div>
 
         <!-- Tax -->
-        <div class="col-span-8 md:col-span-2">
+        <div class="col-span-4 md:col-span-2">
              <label class="block font-medium text-sm" for="tax">Tax</label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="tax" name="tax" type="text" value="{{ @$invoice->tax_name }} - {{ @$invoice->tax_value }}"  readonly style="background:#eee;">
         </div>
