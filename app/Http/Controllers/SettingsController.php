@@ -41,6 +41,12 @@ class SettingsController extends Controller
                         ->where('primary_entity','1')
                         ->first();
          $c->owner_entity_id = $owner_entity->entity_id;
+        // Check if the entity has GSTIN number when GST needs to be set as a setting. //
+         $entity_details = Entity::find($owner_entity->entity_id);
+         if(preg_match("/GST/i", $request->input('name')) && empty($entity_details->GSTIN_number)){
+            Session::flash('alert-danger', 'GSTIN number needs to be set first then GST value. Please set the GSTIN number for this entity, '.$entity_details->name.' on entity edit page.');
+            return redirect('/admin/settings');
+         }   
         try{
             $c->save();
             Session::flash('alert-success', 'Setting saved successfully!');

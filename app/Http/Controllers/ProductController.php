@@ -52,7 +52,12 @@ class ProductController extends Controller
          catch(\Exception $e){
             Session::flash('alert-danger', "Error has orrcured: Please check. ".$e->getMessage());
          }
-        return redirect('/admin/products');
+            if(isset($request->referer)){
+                return redirect($request->referer);
+            }
+            else{
+                return redirect('/admin/products');
+            }
     }
 
     public function deleteProduct(Request $request){

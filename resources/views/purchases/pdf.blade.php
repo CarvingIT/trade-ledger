@@ -27,7 +27,7 @@
     <div class="purchase-box">
         <h1>Purchase #{{ $purchase->id }}</h1>
         <p><b>Vendor</b>: {{ $purchase->entity->name }}</p>
-        <p><b>Date:</b> {{ $purchase->created_at->format('d/m/Y') }}</p>
+        <p><b>Date:</b> {{ date('d/m/Y', strtotime($purchase->purchase_date)) }}</p>
         <p><b>Description</b>: {{ $purchase->description }}</p>
 
         <table border="1" cellspacing="0" cellpadding="5">

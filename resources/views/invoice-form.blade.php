@@ -17,7 +17,7 @@ function newLineItem(){
                     success:function(data) {
                         $.each(data, function(key, value){
                         //$('.product-select').append('<option value="'+ key +'">'+ value +'</option>');
-                        $('select[name="product_id[]"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        $('select[name="product_id[]"]').append('<option value="'+ key +'-'+count+'">'+ value +'</option>');
                         });
                     }
                 });
@@ -26,18 +26,18 @@ var line_div=$('<div id="line_item"></div>');
 var sopra=$('#line_item_new');
 var quantity='';
 for(i = 1; i <= 1000; i++) {
-    //quantity += '<option value="'+i+'-'+count+'">'+i+'</option>';
-    quantity += '<option value="'+i+'">'+i+'</option>';
+    quantity += '<option value="'+i+'-'+count+'">'+i+'</option>';
+    //quantity += '<option value="'+i+'">'+i+'</option>';
 }
 
 const mobileQuery = window.matchMedia("(max-width: 768px)");
 //alert(mobileQuery.matches);
 if (mobileQuery.matches) {
 //Mobile view so all the input fields display in two rows.
-$( sopra ).append( '<hr /><br /><span style="color:#F1541E;">Please choose a product and a quantity. The amount will be displayed only after choosing the quantity and the product.</span><div id="first'+count+'"><div class="px-4 py-5 bg-white sm:p-6 text-gray-900"><div class="grid grid-cols-3 gap-3"><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="product">Products</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" onChange="getRate(this.value);" id="product_id'+count+'" name="product_id[]"><option value="">Choose Product</option></select></div><div class="col-span-1" md:col-span-1"><label class="block font-medium text-sm" for="rate">Rate</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="rate[]" id="rate'+count+'" value="" onChange="calculateAmount();"></div><div class="col-span-1 md:col-span-1"><label class="block font-medium text-sm" for="qty">Qty</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="quantity'+count+'" name="quantity[]" onChange="calculateAmount();"><option value="">Select Qty</option>'+quantity+'</select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="amount">Amount</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="amount[]" id="amount'+count+'" value=""></div></div></div></div>');
+$( sopra ).append( '<hr /><br /><span style="color:#F1541E;">Please choose a product and a quantity. The amount will be displayed only after choosing the quantity and the product.</span><div id="first'+count+'"><div class="px-4 py-5 bg-white sm:p-6 text-gray-900"><div class="grid grid-cols-3 gap-3"><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="product">Products</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" onChange="getRate(this.value);" id="product_id'+count+'" name="product_id[]"><option value="">Choose Product</option></select></div><div class="col-span-1" md:col-span-1"><label class="block font-medium text-sm" for="rate">Rate</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="rate[]" id="rate-'+count+'" value="" onChange="RecalculateAmount(this.id);"></div><div class="col-span-1 md:col-span-1"><label class="block font-medium text-sm" for="qty">Qty</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="quantity'+count+'" name="quantity[]" onChange="calculateAmount(this.value);">'+quantity+'</select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="amount">Amount</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="amount[]" id="amount'+count+'" value=""></div></div></div></div>');
 } else{
 //Desktop view so all the input fields display in one row.
-$( sopra ).append( '<hr /><br /><span style="color:#F1541E;">Please choose a product and a quantity. The amount will be displayed only after choosing the quantity and the product.</span><div id="first'+count+'"><div class="px-4 py-5 bg-white sm:p-6 text-gray-900"><div class="grid grid-cols-6 gap-6"><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="product">Products</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" onChange="getRate(this.value);" id="product_id'+count+'" name="product_id[]"><option value="">Choose Product</option></select></div><div class="col-span-1" md:col-span-1"><label class="block font-medium text-sm" for="rate">Rate</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="rate[]" id="rate'+count+'" value="" onChange="calculateAmount();"></div><div class="col-span-1 md:col-span-1"><label class="block font-medium text-sm" for="qty">Qty</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="quantity'+count+'" name="quantity[]" onChange="calculateAmount();"><option value="">Select Qty</option>'+quantity+'</select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="amount">Amount</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="amount[]" id="amount'+count+'" value=""></div></div></div></div>');
+$( sopra ).append( '<hr /><br /><span style="color:#F1541E;">Please choose a product and a quantity. The amount will be displayed only after choosing the quantity and the product.</span><div id="first'+count+'"><div class="px-4 py-5 bg-white sm:p-6 text-gray-900"><div class="grid grid-cols-6 gap-6"><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="product">Products</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" onChange="getRate(this.value);" id="product_id'+count+'" name="product_id[]"><option value="">Choose Product</option></select></div><div class="col-span-1" md:col-span-1"><label class="block font-medium text-sm" for="rate">Rate</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="rate[]" id="rate-'+count+'" value="" onChange="RecalculateAmount(this.id);"></div><div class="col-span-1 md:col-span-1"><label class="block font-medium text-sm" for="qty">Qty</label><select class="form-input rounded-md shadow-sm mt-1 block w-full" id="quantity'+count+'" name="quantity[]" onChange="calculateAmount(this.value);">'+quantity+'</select></div><div class="col-span-2" md:col-span-2"><label class="block font-medium text-sm" for="amount">Amount</label><input class="form-input rounded-md shadow-sm mt-1 block w-full" type="text" name="amount[]" id="amount'+count+'" value=""></div></div></div></div>');
 }
 count++;
 }
@@ -62,35 +62,133 @@ $("#line_items").DataTable(
         }
     );
 
-function calculateAmount(){
-        var cnt = count-1;
-       //alert(cnt);
-        var quantity = document.getElementById('quantity'+cnt).value;
-        var rate = document.getElementById('rate'+cnt).value;
+function RecalculateAmount(rateId){
+        //alert(rateId);
+        var rate = document.getElementById(rateId).value;
+        var item_rate = rateId.split("-");
+        var r_cnt = item_rate[1];
+        var cnt = r_cnt;
+        //alert(rate);
+
+        var quantityId = document.getElementById('quantity'+cnt).value;
+        var item_type = quantityId.split("-");
+        var quantity = item_type[0];
+        var q_cnt = item_type[1];
+        //alert(quantity);
+
         var amount = quantity * rate;
         document.getElementById('amount'+cnt).value = amount;
     }
 
- function getRate(product_id){
-        var product_id = product_id;
-        //alert(count);
-        var cnt = count-1;
+function calculateAmount(quantityId){
+        var item_qty = quantityId.split("-");
+        var quantity = item_qty[0];
+        var q_cnt = item_qty[1];
+        //alert(quantityId);
+        //alert(quantity);
+        //alert(q_cnt);
+        var cnt = q_cnt;
         //alert(cnt);
+        var rate = document.getElementById('rate-'+cnt).value;
+        //alert("SKK");
+        //alert(rate);
+        var amount = quantity * rate;
+        document.getElementById('amount'+cnt).value = amount;
+    }
+
+ function getRate(productId){
+        var item_type = productId.split("-");
+        var product_id = item_type[0];
+        var p_cnt = item_type[1];
+        //alert(productId);
         //alert(product_id);
+        //alert(p_cnt);
+
+        var cnt = p_cnt-1;
+
         $.ajax({
                     url: '/admin/get_product_rate/ajax/'+product_id,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
                         //alert(data.rate);
-                        $('#rate'+cnt).val(data.rate);
-                        calculateAmount();
+                        $('#rate-'+cnt).val(data.rate);
+                        RecalculateAmount('rate-'+cnt);
                     }
               });
     }
 
+$(document).ready(function(){
+    $('.toggle-div').on('click', function(event){
+        // Prevent the browser from navigating to the anchor's href
+        event.preventDefault();
+
+         // Get the ID of the div to show from the anchor's href attribute
+        var targetDivId = $(this).attr('href'); // e.g., "#div1"
+
+        //Modal
+        $(targetDivId).show();
+
+        // When the user clicks on <closeBtn> (x), close the modal
+        $(".close").click(function(){
+            $(targetDivId).hide();
+        })
+        $(".close-div").click(function(){
+            $(targetDivId).hide();
+        })
+
+        // Prevent clicks inside the modal content from closing the modal
+        $('.modal').on('click', function(e) {
+            e.stopPropagation();
+        });
+
+    });
+
+});
+
 
 </script>
+
+<style>
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 5%; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  /*background-color: #fefefe;*/
+  background-color: #ffffff;
+  margin: auto;
+  padding: 20px;
+  /*border: 1px solid #fb700d;*/
+  width: 60%;
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left:95%;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 
 @endpush
 
@@ -109,6 +207,61 @@ function calculateAmount(){
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 	        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+            <div class="text-right">
+                <a href="#myModal" class="toggle-div inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-bold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray m-1" id="toggleBtn" style="background:#000;">Add New Product</a>
+            </div>
+                        <div id="myModal" class="modal">
+                          <!-- Modal content -->
+                          <div class="modal-content">
+                            <span class="close" id="closeBtn">&times;</span>
+              <div class="mt-6 text-gray-500">
+                <h3>Please fill in your information to access this resource.</h3>
+                      <form name="add-product" action="/admin/saveproduct" method="post">
+                      @csrf
+                        <input type="hidden" name="referer" value="{{ url()->current() }}">
+                        <div class="col-span-8 md:col-span-2">
+                         <label class="block font-medium text-sm" for="sku">SKU<span style="color:#F1541E;">*</span></label>
+                         <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="sku" name="sku" type="text" value="" >
+                        </div>
+        <br />
+        <div class="col-span-8 md:col-span-4">
+             <label class="block font-medium text-sm" for="name">Name of the product <span style="color:#F1541E;">*</span></label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" value="" required>
+        </div>
+        <br />
+        <div class="col-span-4" md:col-span-4">
+             <label class="block font-medium text-sm" for="price">Unit Price (in Rs.) <span style="color:#F1541E;">*</span></label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="price" name="price" type="text" value="" required>
+        </div>
+        <br />
+        <div class="col-span-8 md:col-span-2">
+             <label class="block font-medium text-sm" for="unit">Unit <span style="color:#F1541E;">*</span></label>
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="unit" name="unit">
+                <option value=''>Choose Related Unit</option>
+        @foreach($units as $c)
+        <option value="{{ $c->id }}">{{ $c->name }}</option>
+        @endforeach
+        </select>
+        </div>
+        <br />
+        <div class="col-span-8">
+             <label class="block font-medium text-sm" for="description">Description</label>
+             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text"></textarea>
+        </div>
+               </div>
+            <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
+     <button type="submit" class="button-round inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 m-1 refresh_page" wire:loading.attr="disabled">
+            Add Product 
+     </button>
+     <button type="button" class="button-round inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 m-1 close-div" wire:loading.attr="disabled">
+    Cancel
+     </button>
+            </div>
+            </form>
+            </div><!-- modal-content -->
+            </div><!-- myModal -->
+        <!-- The Modal ends -->
+
     			<div class="mt-6 text-gray-500">
 				<form name="save-invoice" action="/admin/saveinvoice" method="post">
 				<input type="hidden" name="invoice_id" value="{{ $invoice->id }}" />	
@@ -124,14 +277,14 @@ function calculateAmount(){
                    @endif
              @endforeach
         <div class="clear">&nbsp;</div>
-       <div class="grid grid-cols-6 gap-6">
+        <div class="grid grid-cols-6 gap-6">
         <!-- Invoice Date -->
         <div class="col-span-4 md:col-span-4">
             @php
-$month = date('m');
-$day = date('d');
-$year = date('Y');
-$today = $year.'-'.$month.'-'.$day;
+                $month = date('m');
+                $day = date('d');
+                $year = date('Y');
+                $today = $year.'-'.$month.'-'.$day;
             @endphp
              <label class="block font-medium text-sm" for="invoice_date">Invoice Date<span style="color:#F1541E;">*</span></label>
             @if(!preg_match('/new/',url()->current()))
@@ -150,6 +303,12 @@ $today = $year.'-'.$month.'-'.$day;
         @endforeach
         </select>
         </div>
+        <!-- Invoice special discount -->
+        <div class="col-span-4 md:col-span-4">
+             <label class="block font-medium text-sm" for="discount">Special Discount (Optional)</label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="discount" name="discount" type="text" value="{{ $invoice->discount }}" placeholder="2% or Rs. 200">
+        </div>
+
         <!-- Description -->
         <!--
         <div class="col-span-8">

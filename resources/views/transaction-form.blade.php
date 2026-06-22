@@ -9,7 +9,7 @@
 <script type="text/javascript">
 function getInvoices(entity_id){
         var entity_id = entity_id;
-        alert(entity_id);
+        //alert(entity_id);
        $.ajax({ 
                     url: '/admin/get_invoices/ajax/'+entity_id,
                     type: "GET",
@@ -129,7 +129,7 @@ $("#line_items").DataTable(
         <!-- Type -->
         <div class="col-span-8 md:col-span-4">
              <label class="block font-medium text-sm" for="type">Type<span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="type" name="type" type="text" value="{{ $transaction->type }}" placeholder="Online,Cash" required>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="type" name="type" type="text" value="{{ $transaction->type }}" placeholder="Online, Cash, gPay type here" required>
         </div>
         
         <!-- Client's Entity/Company -->
@@ -162,7 +162,7 @@ $("#line_items").DataTable(
         <!-- Client's Transaction Status -->
         <div class="col-span-4">
              <label class="block font-medium text-sm" for="status">Status<span style="color:#F1541E;">*</span></label>
-        <input type="radio" name="status"  value="paid" @if($transaction->status=='paid') checked @endif>&nbsp;{{ __('Paid') }}<br />
+        <input type="radio" name="status"  value="paid" @if($transaction->status=='paid') checked @endif>&nbsp;{{ __('Paid') }}
         <input type="radio" name="status"  value="pending" @if($transaction->status=='pending') checked @endif>&nbsp;{{ __('Pending') }}
         </div>
 

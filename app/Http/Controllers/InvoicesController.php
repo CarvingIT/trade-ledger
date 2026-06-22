@@ -9,6 +9,7 @@ use App\Models\OwnerEntity;
 use App\Models\Product;
 use App\Models\LineItem;
 use App\Models\Setting;
+use App\Models\Unit;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Session;
 use App\Exports\InvoicesExport;
@@ -33,6 +34,7 @@ class InvoicesController extends Controller
         $entities = Entity::all();
         $products = Product::all();
         $line_items = LineItem::where('invoice_id',$invoice_id)->get(); 
+        $units = Unit::all();
 
         if(!empty($invoice->tax_value) && $invoice->tax_name=='GST'){
             $tax_number = str_replace('%', '', $invoice->tax_value);
@@ -41,7 +43,7 @@ class InvoicesController extends Controller
             $tax_number = 0;
         }
 
-        return view('invoice-form', ['invoice'=>$invoice, 'entities'=>$entities, 'products'=>$products, 'line_items'=>$line_items, 'tax_number'=>$tax_number, 'activePage'=>'Invoice', 'titlePage'=>'Invoice']);
+        return view('invoice-form', ['invoice'=>$invoice, 'entities'=>$entities, 'products'=>$products, 'line_items'=>$line_items, 'tax_number'=>$tax_number, 'units'=>$units, 'activePage'=>'Invoice', 'titlePage'=>'Invoice']);
     }
 
     public function save(Request $request){
@@ -57,8 +59,12 @@ echo "<br />";
 foreach($request->quantity as $prod=>$qty){
     echo $product_items[$prod]." Rate: ".$product_rates[$prod]." ".$qty."<br />";
     $product_id = $product_items[$prod];
+    $product_details = explode("-",$product_id);
+    echo $product_id = $product_details[0]."<br />";
                     $product = Product::find($product_id);
                     echo "Name: ".$product->name."<br/>";
+                    $qty_details = explode("-",$qty);
+                    $qty = $qty_details[0];
                     echo "Quantity: ".$qty."<br />";
                     echo "Rate: ".$product->price."<br/>";
                     echo "Amount: ".$amount = $product->price*$qty."<br />";
@@ -72,8 +78,8 @@ exit;
             $c = Invoice::find($request->input('invoice_id'));
          }
 
-         $c->title = $request->input('title');
-         $c->description = $request->input('description');
+         //$c->title = $request->input('title');
+         //$c->description = $request->input('description');
          $c->entity_id = $request->input('entity_id');                       //Client entity id
          $c->invoice_date = $request->input('invoice_date');
          $user_id = auth()->user()->id;
@@ -112,9 +118,15 @@ exit;
          $product_rates = $request->rate;
          if(!empty($request->product_id) && !empty($request->quantity)){
                 foreach($request->quantity as $prod=>$qty){
+                    $qty_details = explode("-",$qty);
+                    $qty = $qty_details[0];
+
                     $line_item = new LineItem();
 
-                    $product_id = $product_items[$prod];
+                    $product_id = $product_items[$prod]; //it comes here like 4-0, 4 is the product id and 0 is div id
+                    $product_details = explode("-",$product_id);//so explode is there
+                    $product_id = $product_details[0];
+
                     $prod_rate = $product_rates[$prod]; //Rate dynamically set in the Invoice form
 
                     $product = Product::find($product_id);
@@ -128,7 +140,25 @@ exit;
                     $line_item->save();
                 }
          }     
-        $c->total_amount = $total_amount;
+         $c->discount = $request->discount;
+        $discount_amount = 0;
+        //Check if discount is in % or Rs
+        if(isset($request->discount)){
+            if(preg_match("/%/",$request->discount)){
+                $discount = preg_replace("/%/","",$request->discount);
+                $discount_amount = ($total_amount*$discount)/100;     
+            }
+            else if(preg_match("/Rs/i",$request->discount)){
+                $discount_amount = preg_replace("/[A-Za-z.-\/-]/i","",$request->discount);
+//echo $request->discount." preg".$discount_amount; exit;
+            }
+            else{
+//echo $request->discount; exit;
+                $discount_amount = preg_replace("/[A-Za-z.-\/-]/i","",$request->discount);
+            }
+        }
+        $c->total_amount = $total_amount-$discount_amount;
+         
         try{
             $c->save();
             Session::flash('alert-success', 'Sale-Invoice saved successfully!');

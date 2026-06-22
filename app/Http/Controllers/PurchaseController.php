@@ -71,6 +71,7 @@ exit;
          $c->title = $request->input('title');
          $c->description = $request->input('description');
          $c->entity_id = $request->input('entity_id');                       //Vendor entity id
+         $c->purchase_date = $request->input('purchase_date');
          $user_id = auth()->user()->id;
          $owner_entity = OwnerEntity::where('user_id', $user_id)
                         ->where('primary_entity','1')                       //Primary meaning Current entity.
@@ -107,8 +108,14 @@ exit;
 
          if(!empty($request->product_id) && !empty($request->quantity)){
                 foreach($request->quantity as $prod=>$qty){
+                    $qty_details = explode("-",$qty);
+                    $qty = $qty_details[0];
+
                     $line_item = new LineItem();
-                    $product_id = $product_items[$prod];
+                    $product_id = $product_items[$prod];//it comes here like 4-0, 4 is the product id and 0 is div id
+                    $product_details = explode("-",$product_id);//so explode is there
+                    $product_id = $product_details[0];
+
                     $prod_rate = $product_rates[$prod]; //Rate dynamically set in the Purchase form
 
                     $product = Product::find($product_id);
@@ -259,13 +266,18 @@ exit;
         public function exportPurchasesByDate(Request $request){
             $start_date = $request->start_date;
             $end_date = $request->end_date; 
-            $start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
-            $end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
 
+            //$start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
+            //$end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
 
-            $purchases = Purchase::whereBetween('created_at', [$start_date, $end_date])
+            $start_date = date('Y-m-d', strtotime($request->input('start_date')));
+            $end_date = date('Y-m-d', strtotime($request->input('end_date')));
+
+            //$purchases = Purchase::whereBetween('created_at', [$start_date, $end_date])
+             //           ->get();
+
+            $purchases = Purchase::whereBetween('purchase_date', [$start_date, $end_date])
                         ->get();
-
 
             $export_purchases = [];
             foreach($purchases as $inv){
