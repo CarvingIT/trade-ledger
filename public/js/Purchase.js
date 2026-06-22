@@ -74,19 +74,19 @@ $(document).ready(function() {
     } );
     }
 //
-    const form = document.getElementById("downloadPurchases");
+    //const form = document.getElementById("downloadPurchases");
 
-    const start_d = document.getElementById("start_datepicker");
-    start_d.addEventListener("change", function() {
+    //const start_d = document.getElementById("start_datepicker");
+    //start_d.addEventListener("change", function() {
         // Submit the form automatically when the date value changes
-        form.submit();
-    });
+     //   form.submit();
+    //});
 
-    const end_d = document.getElementById("end_datepicker");
-    end_d.addEventListener("change", function() {
+    //const end_d = document.getElementById("end_datepicker");
+    //end_d.addEventListener("change", function() {
         // Submit the form automatically when the date value changes
-        form.submit();
-    });
+     //   form.submit();
+    //});
 
     $(".delete_purchase").click(function(){
         const purchase_id = $(this).data('purchase-id');

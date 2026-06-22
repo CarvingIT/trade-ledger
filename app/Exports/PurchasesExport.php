@@ -24,7 +24,7 @@ class PurchasesExport implements FromArray, WithHeadings
     public function headings(): array{
         return
         [
-            'Created At',
+            'Purchase Date',
             'Owner Entity',
             'Title',
             'Vendor Entity',

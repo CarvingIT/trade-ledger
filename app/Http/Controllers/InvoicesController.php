@@ -296,6 +296,11 @@ exit;
         public function exportInvoicesByDate(Request $request){
             $start_date = $request->start_date;
             $end_date = $request->end_date; 
+            
+            if(strtotime($start_date) > strtotime($end_date)){
+            Session::flash('alert-danger', "Start Date should be before or less than the End Date");
+                return redirect('/admin/invoices');
+            }
 
             //$start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
             //$end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
@@ -324,7 +329,7 @@ exit;
                     $total_amount_including_tax = $total_amount + ($total_amount * (int)$tax_number/100);
                 }
 
-                $export_invoices[] = [$inv->id, $inv->created_at, $inv->owner_entity->name, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
+                $export_invoices[] = [$inv->id, $inv->invoice_date, $inv->owner_entity->name, $inv->entity->name, $inv->total_amount, $total_amount_including_tax, $inv->tax_name, $inv->tax_value, $inv->description];
             }
 
             $file_name = 'Invoices_'.time().'.xlsx';

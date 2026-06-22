@@ -97,6 +97,13 @@ class TransactionController extends Controller
     public function exportTransactionsByDate(Request $request){
             $start_date = $request->start_date;
             $end_date = $request->end_date;
+
+            if(strtotime($start_date) > strtotime($end_date)){
+            Session::flash('alert-danger', "Start Date should be before or less than the End Date");
+                return redirect('/admin/transactions');
+            }
+
+
             $start_date = date('Y-m-d h:m:s', strtotime($request->input('start_date')));
             $end_date = date('Y-m-d h:m:s', strtotime($request->input('end_date')));
 
