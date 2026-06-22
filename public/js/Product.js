@@ -50,9 +50,6 @@ $(document).ready(function() {
     }
 
 //
-});
-
-$(document).ready(function(){
     $(".delete_product").click(function(){
         const product_id = $(this).data('product-id');
         //alert(product_id);

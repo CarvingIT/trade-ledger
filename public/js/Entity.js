@@ -50,9 +50,6 @@ $(document).ready(function() {
     }
 
 //
-});
-
-$(document).ready(function(){
     $(".delete_entity").click(function(){
         const entity_id = $(this).data('entity-id');
         //alert(entity_id);

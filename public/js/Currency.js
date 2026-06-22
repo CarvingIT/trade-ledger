@@ -44,9 +44,6 @@ $(document).ready(function() {
     }
 
 //
-});
-
-$(document).ready(function(){
     $(".delete_currency").click(function(){
         const currency_id = $(this).data('currency-id');
         //alert(currency_id);

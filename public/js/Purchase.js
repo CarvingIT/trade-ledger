@@ -1,8 +1,3 @@
-$( function() {
-    $( "#datepicker" ).datepicker();
-    $( "#datepicker1" ).datepicker();
-  } );
-
 $(document).ready(function() {
      $("#purchases").DataTable(
         {
@@ -79,25 +74,20 @@ $(document).ready(function() {
     } );
     }
 //
-});
+    const form = document.getElementById("downloadPurchases");
 
-$(document).ready(function(){
-    const form = document.getElementById("downloadInvoices");
-
-    const start_d = document.getElementById("datepicker");
+    const start_d = document.getElementById("start_datepicker");
     start_d.addEventListener("change", function() {
         // Submit the form automatically when the date value changes
         form.submit();
     });
 
-    const end_d = document.getElementById("datepicker1");
+    const end_d = document.getElementById("end_datepicker");
     end_d.addEventListener("change", function() {
         // Submit the form automatically when the date value changes
         form.submit();
     });
-});
 
-$(document).ready(function(){
     $(".delete_purchase").click(function(){
         const purchase_id = $(this).data('purchase-id');
         //alert(purchase_id);

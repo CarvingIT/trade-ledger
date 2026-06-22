@@ -42,12 +42,12 @@
 
             <form name="invoices_export" action="/admin/invoices" method="GET" id="downloadInvoices">
                 <div class="col-span-4" style="float:left; padding-right:1%;">
-                <label class="block font-medium text-sm" for="datepicker">Invoice Start Date </label>
-                <input class="form-input rounded-md shadow-sm mt-1 block" name="start_date" type="date" value="@if(!empty($_GET)){{ $_GET['start_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
+                <label class="block font-medium text-sm" for="start_datepicker">Invoice Start Date </label>
+                <input class="form-input rounded-md shadow-sm mt-1 block" id="start_datepicker" name="start_date" type="date" value="@if(!empty($_GET)){{ $_GET['start_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
                 </div>
                 <div class="col-span-4" style="float:left;">
-                <label class="block font-medium text-sm" for="datepicker1">Invoice End Date </label>
-                <input class="form-input rounded-md shadow-sm mt-1 block" name="end_date" type="date" value="@if(!empty($_GET)){{ $_GET['end_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
+                <label class="block font-medium text-sm" for="end_datepicker">Invoice End Date </label>
+                <input class="form-input rounded-md shadow-sm mt-1 block" id="end_datepicker" name="end_date" type="date" value="@if(!empty($_GET)){{ $_GET['end_date'] }}@endif" placeholder="YYYY-MM-DD" onChange="this.form.submit();">
                 </div>
             </form>
             <div class="clear">&nbsp;</div>

@@ -1,8 +1,3 @@
-$( function() {
-    $( "#datepicker" ).datepicker();
-    $( "#datepicker1" ).datepicker();
-  } );
-
 $(document).ready(function() {
      $("#invoices").DataTable(
         {
@@ -80,25 +75,20 @@ $(document).ready(function() {
     } );
     }
 //
-});
-
-$(document).ready(function(){
     const form = document.getElementById("downloadInvoices");
 
-    const start_d = document.getElementById("datepicker");
+    const start_d = document.getElementById("start_datepicker");
     start_d.addEventListener("change", function() {
         // Submit the form automatically when the date value changes
         form.submit();
     });
 
-    const end_d = document.getElementById("datepicker1");
+    const end_d = document.getElementById("end_datepicker");
     end_d.addEventListener("change", function() {
         // Submit the form automatically when the date value changes
         form.submit();
     });
-});
 
-$(document).ready(function(){
     $(".delete_invoice").click(function(){
         const invoice_id = $(this).data('invoice-id');
         //alert(invoice_id);

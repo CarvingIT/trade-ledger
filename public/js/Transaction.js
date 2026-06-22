@@ -1,9 +1,3 @@
-$( function() {
-    $( "#datepicker" ).datepicker();
-    $( "#datepicker1" ).datepicker();
-  } );
-
-
 $(document).ready(function() {
      $("#transactions").DataTable(
         {
@@ -83,9 +77,6 @@ $(document).ready(function() {
     }
 
 //
-});
-
-$(document).ready(function(){
     $(".delete_transaction").click(function(){
         const transaction_id = $(this).data('transaction-id');
         //alert(transaction_id);

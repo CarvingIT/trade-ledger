@@ -48,9 +48,6 @@ $(document).ready(function() {
     }
 
 //
-});
-
-$(document).ready(function(){
     $(".delete_setting").click(function(){
         const setting_id = $(this).data('setting-id');
         //alert(setting_id);

@@ -48,10 +48,7 @@ $(document).ready(function() {
     } );
     }
 
-//
-});
 
-$(document).ready(function(){
     $(".delete_unit").click(function(){
         const unit_id = $(this).data('unit-id');
         //alert(unit_id);
@@ -69,6 +66,8 @@ $(document).ready(function(){
     $(".admin-dropdown").click(function(){
         $("#admin-dropdown-content").toggle();
     });
+
+//
 });
 
 /*

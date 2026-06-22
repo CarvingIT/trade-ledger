@@ -48,9 +48,6 @@ $(document).ready(function() {
     }
 
 //
-});
-
-$(document).ready(function(){
     $(".delete_user").click(function(){
         const user_id = $(this).data('user-id');
         //alert(user_id);
