@@ -75,8 +75,8 @@
 			@foreach ($purchases as $c)
         		<tr>
 			<td>{{ $c->title }}</td>
-			<td>{{ $c->owner_entity->name }}</td>
-			<td>{{ $c->entity->name }}</td>
+			<td>{{ @$c->owner_entity->name }}</td>
+			<td>{{ @$c->entity->name }}</td>
 			<td>{{ $c->total_amount }}</td>
 			<td>{{ $c->purchase_date }}</td>
 			<td>{{ $c->created_at }}</td>

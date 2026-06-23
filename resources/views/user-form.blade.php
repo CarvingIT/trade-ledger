@@ -69,7 +69,7 @@
         @if(!empty($owner_entities_array))
             <ul>
             @foreach($owner_entities as $entity)
-                <li>{{ $entity->entity->name }}</li>
+                <li>{{ @$entity->entity->name }}</li>
             @endforeach
             </ul>
         @else

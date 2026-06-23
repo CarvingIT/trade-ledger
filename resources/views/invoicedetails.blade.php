@@ -53,13 +53,13 @@
         <!-- Owner Entity -->
         <div class="col-span-4 md:col-span-4">
              <label class="block font-medium text-sm" for="owner entity">Owner Entity</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="owner_entity" name="owner_entity" type="text" value="{{ $invoice->owner_entity->name }}"  readonly style="background:#eee;">
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="owner_entity" name="owner_entity" type="text" value="{{ @$invoice->owner_entity->name }}"  readonly style="background:#eee;">
         </div>
 
         <!-- Client Entity -->
         <div class="col-span-4 md:col-span-4">
              <label class="block font-medium text-sm" for="client_entity">Client Entity</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="client_entity" name="client_entity" type="text" value="{{ $invoice->entity->name }}"  readonly style="background:#eee;">
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="client_entity" name="client_entity" type="text" value="{{ @$invoice->entity->name }}"  readonly style="background:#eee;">
         </div>
 
 

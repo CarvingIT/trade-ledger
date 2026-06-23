@@ -50,7 +50,7 @@
         <!-- Owner Entity -->
         <div class="col-span-8 md:col-span-2">
              <label class="block font-medium text-sm" for="owner_entity">Owner Entity</label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="owner_entity" name="owner_entity" type="text" value="{{ $account->owner_entity->name }}"  readonly style="background:#eee;">
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="owner_entity" name="owner_entity" type="text" value="{{ @$account->owner_entity->name }}"  readonly style="background:#eee;">
         </div>
 
         <!-- Description -->

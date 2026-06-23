@@ -53,7 +53,7 @@
 			@foreach ($accounts as $c)
         		<tr>
 			<td>{{ $c->name }}</td>
-			<td>{{ $c->owner_entity->name }}</td>
+			<td>{{ @$c->owner_entity->name }}</td>
 			<td>{{ \Illuminate\Support\Str::limit($c->description, 30, $end='...') }}</td>
 			<td>
 				<a href="/admin/account/{{ $c->id }}" title="View Details"><span class="fas fa-eye" style="padding:5%;"></span></a>

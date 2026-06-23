@@ -26,7 +26,7 @@
 <body>
     <div class="invoice-box">
         <h1>Invoice #{{ $invoice->id }}</h1>
-        <p><b>Customer</b>: {{ $invoice->entity->name }}</p>
+        <p><b>Customer</b>: {{ @$invoice->entity->name }}</p>
         <p><b>Date:</b> {{ date('d/m/Y', strtotime($invoice->invoice_date)) }}</p>
         <p><b>Description</b>: {{ $invoice->description }}</p>
 
@@ -66,7 +66,7 @@
         </table>
         <div class="text-left">
             Yours faithfully,<br />
-            {{ $invoice->owner_entity->name }}
+            {{ @$invoice->owner_entity->name }}
         </div>    
         <div class="text-right">
             Thank you for your business.

@@ -76,8 +76,8 @@
 			@foreach ($invoices as $c)
         		<tr>
 			<td>{{ $c->id }}</td>
-			<td>{{ $c->owner_entity->name }}</td>
-			<td>{{ $c->entity->name }}</td>
+			<td>{{ @$c->owner_entity->name }}</td>
+			<td>{{ @$c->entity->name }}</td>
 			<td>{{ $c->total_amount }}</td>
 			<td>{{ $c->invoice_date }}</td>
 			<td>{{ date('Y-m-d', strtotime($c->created_at)) }}</td>

@@ -77,10 +77,10 @@
                         <tbody>
 			@foreach ($transactions as $c)
         		<tr>
-			<td>{{ $c->owner_entity->name }}</td>
+			<td>{{ @$c->owner_entity->name }}</td>
 			<td>{{ $c->account->name }}</td>
 			<td>{{ $c->type }}</td>
-			<td>{{ $c->entity->name }}</td>
+			<td>{{ @$c->entity->name }}</td>
 			<td>{{ $c->invoice_id }}</td>
 			<td>{{ $c->total_amount }}</td>
 			<td>{{ ucfirst($c->status) }}</td>

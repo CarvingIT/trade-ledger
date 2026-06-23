@@ -26,7 +26,7 @@
 <body>
     <div class="purchase-box">
         <h1>Purchase #{{ $purchase->id }}</h1>
-        <p><b>Vendor</b>: {{ $purchase->entity->name }}</p>
+        <p><b>Vendor</b>: {{ @$purchase->entity->name }}</p>
         <p><b>Date:</b> {{ date('d/m/Y', strtotime($purchase->purchase_date)) }}</p>
         <p><b>Description</b>: {{ $purchase->description }}</p>
 
@@ -64,7 +64,7 @@
         </table>
         <div class="text-left">
             Yours faithfully,<br />
-            {{ $purchase->owner_entity->name }}
+            {{ @$purchase->owner_entity->name }}
         </div>    
         <div class="text-right">
             Thank you for your business.
