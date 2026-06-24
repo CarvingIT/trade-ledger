@@ -8,7 +8,7 @@ class OwnerEntity extends Model
 {
     //
     public function entity(){
-        return $this->belongsTo(Entity::class, 'entity_id');
+        return $this->belongsTo(Entity::class, 'entity_id')->withTrashed();
     }
     public function user(){
         return $this->belongsTo(User::class, 'user_id');

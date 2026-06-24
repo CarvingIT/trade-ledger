@@ -71,7 +71,23 @@ class User extends Authenticatable
     }
 
     public function entity(){
-        return $this->belongsTo(Entity::class, 'entity_id');
+        return $this->belongsTo(Entity::class, 'entity_id')->withTrashed();
+    }
+
+    public function owner_entities(){
+        return $this->hasMany(OwnerEntity::class);
+    }
+
+    public function getCurrentChosenEntity(){
+        $owner_entity = OwnerEntity::where('user_id', auth()->user()->id)
+                        ->where('primary_entity','1')                       //Primary meaning Current entity.
+                        ->first();
+        if(!empty($owner_entity->entity_id)){
+        return $owner_entity->entity_id;
+        }
+        else {
+        return 0;
+        }
     }
 
     public function get_current_entity($entity_id){

@@ -16,7 +16,8 @@ class TransactionController extends Controller
 {
     //
     public function index(){
-        $transactions = Transaction::all();
+        $owner_entity_id = auth()->user()->getCurrentChosenEntity();
+        $transactions = Transaction::where('owner_entity_id', $owner_entity_id)->get();
         return view('transactionsmanagement', ['transactions'=>$transactions, 'activePage'=>'Transactions','titlePage'=>'Transactions']);
     }
 
@@ -30,8 +31,18 @@ class TransactionController extends Controller
             $invoices = Invoice::where('entity_id', $transaction->entity_id) 
                         ->get();
         }
-        $accounts = Account::all();
-        $entities = Entity::all();
+        
+        $user_id = auth()->user()->id;
+        $owner_entity = OwnerEntity::where('user_id', $user_id)
+                        ->where('primary_entity','1')                       //Primary meaning Current entity.
+                        ->first();
+        if(empty($owner_entity->id)){
+            Session::flash('alert-danger', "Transaction creation failed. Please check if your current business is chosen on the dashboard. Then create the payment.");
+            return redirect('/admin/transactions');
+        }
+
+        $accounts = Account::where('owner_entity_id', $owner_entity->entity_id)->get();
+        $entities = Entity::withTrashed()->get();
         return view('transaction-form', ['transaction'=>$transaction, 'invoices'=>$invoices, 'accounts'=>$accounts, 'entities'=>$entities, 'activePage'=>'Transaction', 'titlePage'=>'Transaction']);
     }
 

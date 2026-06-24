@@ -19,7 +19,9 @@ class PurchaseController extends Controller
 {
     //
     public function index(){
-        $purchases = Purchase::all();
+        $owner_entity_id = auth()->user()->getCurrentChosenEntity();
+        $purchases = Purchase::where('owner_entity_id',$owner_entity_id)->get();
+        //$purchases = Purchase::get();
         return view('purchasesmanagement', ['purchases'=>$purchases, 'activePage'=>'Purchases','titlePage'=>'Purchases']);
     }
 
@@ -281,7 +283,9 @@ exit;
             //$purchases = Purchase::whereBetween('created_at', [$start_date, $end_date])
              //           ->get();
 
+            $owner_entity_id = auth()->user()->getCurrentChosenEntity();
             $purchases = Purchase::whereBetween('purchase_date', [$start_date, $end_date])
+                        ->where('owner_entity_id',$owner_entity_id)
                         ->get();
 
             $export_purchases = [];

@@ -117,7 +117,7 @@ $("#line_items").DataTable(
        <div class="grid grid-cols-6 gap-6">
         <!-- Accounts -->
         <div class="col-span-4">
-             <label class="block font-medium text-sm" for="entity_id">Accounts<span style="color:#F1541E;">*</span></label>
+             <label class="block font-medium text-sm" for="entity_id">Accounts <span style="color:#F1541E;">(To get the options here, first add the account for your current entity, on Accounts page.)</span></label>
              <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="account_id" name="account_id" required>
             <option value="">Select Account</option>
         @foreach($accounts as $c)

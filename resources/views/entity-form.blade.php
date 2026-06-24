@@ -31,7 +31,7 @@
     <div class="px-4 py-5 bg-white sm:p-6 text-gray-900">
        <div class="grid grid-cols-6 gap-6">
         <!-- Company Name -->
-        <div class="col-span-8 md:col-span-4">
+        <div class="col-span-4 md:col-span-4">
              <label class="block font-medium text-sm" for="name">Name of the company <span style="color:#F1541E;">*</span></label>
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" value="{{ $entity->name }}" required>
         </div>

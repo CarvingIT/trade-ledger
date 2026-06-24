@@ -20,7 +20,8 @@ class InvoicesController extends Controller
 {
     //
     public function index(){
-        $invoices = Invoice::all();
+        $owner_entity_id = auth()->user()->getCurrentChosenEntity();
+        $invoices = Invoice::where('owner_entity_id',$owner_entity_id)->get();
         return view('invoicesmanagement', ['invoices'=>$invoices, 'activePage'=>'Invoices','titlePage'=>'Invoices']);
     }
 
@@ -309,7 +310,10 @@ exit;
 
             #$invoices = Invoice::whereBetween('created_at', [$start_date, $end_date])
             #            ->get();
-            $invoices = Invoice::whereBetween('invoice_date', [$start_date, $end_date])
+
+            $owner_entity_id = auth()->user()->getCurrentChosenEntity();
+            $invoices = Invoice::where('owner_entity_id',$owner_entity_id)
+                        ->whereBetween('invoice_date', [$start_date, $end_date])
                         ->get();
 
             $export_invoices = [];

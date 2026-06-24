@@ -37,8 +37,8 @@
 	
         <!-- Description -->
         <div class="col-span-8">
-             <label class="block font-medium text-sm" for="description">Description</label>
-             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text">{{ $account->description }}</textarea>
+             <label class="block font-medium text-sm" for="description">Description <span style="color:#F1541E;">*</span></label>
+             <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="description" name="description" type="text" required>{{ $account->description }}</textarea>
         </div>
 
        </div>

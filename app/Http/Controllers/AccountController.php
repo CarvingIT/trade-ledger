@@ -11,7 +11,8 @@ class AccountController extends Controller
 {
     //
     public function index(){
-        $accounts = Account::all();
+        $owner_entity_id = auth()->user()->getCurrentChosenEntity();
+        $accounts = Account::where('owner_entity_id',$owner_entity_id)->get();
         return view('accountsmanagement', ['accounts'=>$accounts, 'activePage'=>'Accounts','titlePage'=>'Accounts']);
     }
 

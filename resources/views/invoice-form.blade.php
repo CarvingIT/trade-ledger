@@ -278,6 +278,16 @@ $(document).ready(function(){
              @endforeach
         <div class="clear">&nbsp;</div>
         <div class="grid grid-cols-6 gap-6">
+        <!-- Client's Company -->
+        <div class="col-span-4 md:col-span-4">
+             <label class="block font-medium text-sm" for="entity_id">Client Entity<span style="color:#F1541E;">*</span></label>
+             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" required>
+        @foreach($entities as $c)
+            @php if(auth()->user()->get_current_entity($c->id) == 1) continue;  @endphp
+        <option value="{{ $c->id }}" @if($c->id == $invoice->entity_id) selected @endif>{{ $c->name }}</option>
+        @endforeach
+        </select>
+        </div>
         <!-- Invoice Date -->
         <div class="col-span-4 md:col-span-4">
             @php
@@ -292,16 +302,6 @@ $(document).ready(function(){
             @else
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="invoice_date" name="invoice_date" type="date" value="{{ $today }}" required>
             @endif
-        </div>
-        <!-- Client's Company -->
-        <div class="col-span-4 md:col-span-4">
-             <label class="block font-medium text-sm" for="entity_id">Client Entity<span style="color:#F1541E;">*</span></label>
-             <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" required>
-        @foreach($entities as $c)
-            @php if(auth()->user()->get_current_entity($c->id) == 1) continue;  @endphp
-        <option value="{{ $c->id }}" @if($c->id == $invoice->entity_id) selected @endif>{{ $c->name }}</option>
-        @endforeach
-        </select>
         </div>
         <!-- Invoice special discount -->
         <div class="col-span-4 md:col-span-4">

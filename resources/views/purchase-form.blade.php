@@ -153,7 +153,12 @@ function getRate(productId){
                @endforeach
         <div class="clear">&nbsp</div>
        <div class="grid grid-cols-6 gap-6">
-        <!-- Invoice Date -->
+        <!-- Title -->
+        <div class="col-span-4 md:col-span-4">
+             <label class="block font-medium text-sm" for="title">Title<span style="color:#F1541E;">*</span></label>
+             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="title" name="title" type="text" value="{{ $purchase->title }}" required>
+        </div>
+        <!-- Purchase Date -->
         <div class="col-span-4 md:col-span-4">
             @php
                 $month = date('m');
@@ -168,15 +173,9 @@ function getRate(productId){
              <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="purchase_date" name="purchase_date" type="date" value="{{ $today }}" required>
             @endif
         </div>
-
-        <!-- Title -->
-        <div class="col-span-4 md:col-span-4">
-             <label class="block font-medium text-sm" for="title">Title<span style="color:#F1541E;">*</span></label>
-             <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="title" name="title" type="text" value="{{ $purchase->title }}" required>
-        </div>
         
         <!-- Client's Company -->
-        <div class="col-span-4">
+        <div class="col-span-4 md:col-span-4">
              <label class="block font-medium text-sm" for="entity_id">Vendor Entity<span style="color:#F1541E;">*</span></label>
              <select class="form-input rounded-md shadow-sm mt-1 block w-full" id="entity_id" name="entity_id" required>
         @foreach($entities as $c)

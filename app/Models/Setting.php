@@ -8,6 +8,6 @@ class Setting extends Model
 {
     //
     public function owner_entity(){
-        return $this->belongsTo(Entity::class,'owner_entity_id');
+        return $this->belongsTo(Entity::class,'owner_entity_id')->withTrashed();
     }
 }

@@ -12,7 +12,11 @@ class SettingsController extends Controller
 {
     //
     public function index(){
-        $settings = Setting::all();
+        //$settings = Setting::all();
+        $owner_entity_id = auth()->user()->getCurrentChosenEntity();
+        $settings = Setting::has('owner_entity')
+                    ->where('owner_entity_id',$owner_entity_id)
+                    ->get(); //Displays records whose owner entity is available
         return view('settingsmanagement', ['settings'=>$settings, 'activePage'=>'Settings','titlePage'=>'Settings']);
     }
 
